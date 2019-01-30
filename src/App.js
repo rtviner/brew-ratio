@@ -22,6 +22,7 @@ class App extends Component {
       ingredients: '',
       error: null,
     };
+
     this.onSubmitChange = this.onSubmitChange.bind(this);
     this.onCupsSubmit = this.onCupsSubmit.bind(this);
   }
@@ -53,7 +54,10 @@ class App extends Component {
 
             </CupInput>
           </div>
-          <Ingredients>
+          <Ingredients
+            coffeeGrams={this.state.ingredients.coffee}
+            waterGrams={this.state.ingredients.water}
+          >
           </Ingredients>
         </main>
       </div>
@@ -76,14 +80,14 @@ const CupInput = ({value, onChange, onSubmit}) =>
           </button>
         </form>
 
-const Ingredients = (waterGrams, coffeeGrams) =>
-  <div className="ingredients-result">
+const Ingredients = ({ coffeeGrams, waterGrams }) =>
+  <div className="ingredients">
     <div className="coffee">
-     
+      {coffeeGrams}
       (g)
     </div>
     <div className="water"> 
-
+      {waterGrams}
       (g)
     </div>
   </div>
