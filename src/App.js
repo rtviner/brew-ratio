@@ -4,20 +4,19 @@ import './App.css';
 const DefaultCups = 2;
 
 // input grams of water per 1 cup and desired cups (user input number) and output will be the number of grams of water required to make those desired cups
-const WaterGrams = (cupSizeML = 280, desiredCups) => cupSizeML * desiredCups;
+// const WaterGrams = (cupSizeML = 280, desiredCups) => cupSizeML * desiredCups;
 
 //input waterGrams needed for desiredCups of coffee and goldenRatio (grams of water per 1 gram coffee) and outputs coffee grams required to make desired cups.
-const CoffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
+// const CoffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
 
 //input coffeeGrams available (user input number) and goldenRatio and outPuts number of cups possible
-const DesiredCups = (coffeeGrams, goldenRatio = 15) => coffeeGrams / goldenRatio;
+// const DesiredCups = (coffeeGrams, goldenRatio = 15) => coffeeGrams / goldenRatio;
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cupsKey: '',
       cups: DefaultCups,
       ingredients: '',
       error: null,
@@ -33,12 +32,30 @@ class App extends Component {
 
   onCupsSubmit(event) {
     const { cups } = this.state;
-    this.setState({ cupsKey: cups });
+    this.setIngredients(cups); 
     event.preventDefault();
   }
 
+  setIngredients(cups) {
+    // const { desiredCups } = cups;
+    // const waterGrams = (cupSizeML = 280, desiredCups ) => cupSizeML * desiredCups;
+    const waterGrams = Math.floor(280 * cups);
+    // const coffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
+    const coffeeGrams = Math.floor(waterGrams / 15.5);
+
+    this.setState({
+      ingredients: {
+        coffee: coffeeGrams,
+        water: waterGrams
+      }
+    });
+  }
+
   render() {
-    const { cups, ingredients, error} = this.state;
+    const { cups, ingredients} = this.state;
+    const coffee = (ingredients.coffee);
+    const water = (ingredients.water);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -51,12 +68,11 @@ class App extends Component {
               onChange={this.onSubmitChange}
               onSubmit = {this.onCupsSubmit}
             >
-
             </CupInput>
           </div>
           <Ingredients
-            coffeeGrams={this.state.ingredients.coffee}
-            waterGrams={this.state.ingredients.water}
+            coffee={coffee}
+            water={water}
           >
           </Ingredients>
         </main>
@@ -68,7 +84,7 @@ class App extends Component {
 const CupInput = ({value, onChange, onSubmit}) =>
         <form onSubmit = {onSubmit}>
           <label>
-            Desired Cups:
+            Desired 10oz Cups:
             <input
               type="text"
               value={value}
@@ -80,15 +96,13 @@ const CupInput = ({value, onChange, onSubmit}) =>
           </button>
         </form>
 
-const Ingredients = ({ coffeeGrams, waterGrams }) =>
+const Ingredients = ({ coffee, water }) =>
   <div className="ingredients">
     <div className="coffee">
-      {coffeeGrams}
-      (g)
+      {coffee}g coffee
     </div>
     <div className="water"> 
-      {waterGrams}
-      (g)
+      {water}g water
     </div>
   </div>
 
