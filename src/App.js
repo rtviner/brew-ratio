@@ -27,6 +27,8 @@ class App extends Component {
   }
 
   onSubmitChange(event) {
+    //make sure input is a number here or post an error message
+
     this.setState({ cups: event.target.value });
   }
 
@@ -86,7 +88,8 @@ const CupInput = ({value, onChange, onSubmit}) =>
           <label>
             Desired 10oz Cups:
             <input
-              type="text"
+              type="number"
+              step=".01"
               value={value}
               onChange={onChange}
             />
