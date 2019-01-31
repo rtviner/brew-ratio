@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 
 const DefaultCups = 2;
+const DefaultRatio = 15.5;
 
 // input grams of water per 1 cup and desired cups (user input number) and output will be the number of grams of water required to make those desired cups
 // const WaterGrams = (cupSizeML = 280, desiredCups) => cupSizeML * desiredCups;
-
 //input waterGrams needed for desiredCups of coffee and goldenRatio (grams of water per 1 gram coffee) and outputs coffee grams required to make desired cups.
 // const CoffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
-
 //input coffeeGrams available (user input number) and goldenRatio and outPuts number of cups possible
 // const DesiredCups = (coffeeGrams, goldenRatio = 15) => coffeeGrams / goldenRatio;
 
@@ -18,6 +17,7 @@ class App extends Component {
 
     this.state = {
       cups: DefaultCups,
+      goldenRatio: DefaultRatio,
       ingredients: '',
       error: null,
     };
@@ -32,16 +32,16 @@ class App extends Component {
 
   onCupsSubmit(event) {
     const { cups } = this.state;
-    this.setIngredients(cups); 
+    const { goldenRatio } = this.state;
+    this.setIngredients(cups, goldenRatio); 
     event.preventDefault();
   }
 
-  setIngredients(cups) {
-    // const { desiredCups } = cups;
-    // const waterGrams = (cupSizeML = 280, desiredCups ) => cupSizeML * desiredCups;
-    const waterGrams = Math.floor(280 * cups);
+  setIngredients(cups, goldenRatio) {
+    const cupSize = 280;
+    const waterGrams = Math.round(cupSize * cups);
     // const coffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
-    const coffeeGrams = Math.floor(waterGrams / 15.5);
+    const coffeeGrams = Math.round(waterGrams / goldenRatio);
 
     this.setState({
       ingredients: {
