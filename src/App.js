@@ -28,8 +28,7 @@ class App extends Component {
 
   onSubmitChange(event) {
     //make sure input is a number here or post an error message
-
-    this.setState({ cups: event.target.value });
+    (isNaN(event.target.value)) ? this.setState({ cups: 0}): this.setState({ cups: event.target.value });
   }
 
   onCupsSubmit(event) {
