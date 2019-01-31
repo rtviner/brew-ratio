@@ -23,7 +23,6 @@ class App extends Component {
       ingredients: '',
       error: null,
       selectedButton: 'no',
-      yesChecked: false
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
@@ -33,7 +32,6 @@ class App extends Component {
 
   onButtonChange(event) {
     this.setState({ selectedButton: event.target.value })
-    this.setState({ yesChecked: !this.state.yesChecked })
   }
 
   onSubmitChange(event) {
