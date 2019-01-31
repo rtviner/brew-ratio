@@ -22,7 +22,8 @@ class App extends Component {
       goldenRatio: DefaultRatio,
       ingredients: '',
       error: null,
-      yesButton: false,
+      selectedButton: 'no',
+      yesChecked: false
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
@@ -31,7 +32,8 @@ class App extends Component {
   }
 
   onButtonChange(event) {
-    this.setState({ yesButton: !this.state.yesButton })
+    this.setState({ selectedButton: event.target.value })
+    this.setState({ yesChecked: !this.state.yesChecked })
   }
 
   onSubmitChange(event) {
@@ -61,7 +63,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, ingredients, yesButton } = this.state;
+    const { cups, ingredients, selectedButton } = this.state;
     const coffee = (ingredients.coffee);
     const water = (ingredients.water);
 
@@ -75,18 +77,20 @@ class App extends Component {
             <h2>Coffee beans running low?</h2>
             <p>Check "yes" below if you have a random amount of ground coffee left to brew.</p>
             <p>Check "no" if you prefer to brew a specific number of cups.</p>
-            <RadioInput 
-              value="yes"
-              onChange={this.onButtonChange}
-              checked={false}
-            />
-            <RadioInput 
-              value="no"
-              onChange={this.onButtonChange}
-              checked={true}
-            />
+            <form>
+              <RadioInput 
+                value="yes"
+                onChange={this.onButtonChange}
+                checked={this.state.selectedButton === 'yes'}
+              />
+              <RadioInput 
+                value="no"
+                onChange={this.onButtonChange}
+                checked={this.state.selectedButton === 'no'}
+              />
+              </form>
           </div>
-          { yesButton
+          { (this.state.selectedButton === 'yes')
             ? <div className="grindsInput">
                 <div className="interactions">
                   <label>How much ground beans do you have (g)?
