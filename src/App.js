@@ -3,6 +3,8 @@ import './App.css';
 
 const DefaultCups = 2;
 const DefaultRatio = 15.5;
+const CoffeeGrindsLabel = "g coffee (ground)";
+const CupsLabel = "10oz cups"
 
 // input grams of water per 1 cup and desired cups (user input number) and output will be the number of grams of water required to make those desired cups
 // const WaterGrams = (cupSizeML = 280, desiredCups) => cupSizeML * desiredCups;
@@ -65,7 +67,7 @@ class App extends Component {
         <main>
           <div className="interactions">
           <h2>How much brewed coffee would you like?</h2>
-            <label>Desired 10oz Cups:
+            <label>Desired {CupsLabel}:
               <CupGrindInput 
                 value={cups}
                 onChange={this.onSubmitChange}
@@ -77,6 +79,7 @@ class App extends Component {
           <Ingredients
             coffee={coffee}
             water={water}
+            label={CoffeeGrindsLabel}
           >
           </Ingredients>
           <div className="interactions">
@@ -93,6 +96,7 @@ class App extends Component {
               <Ingredients
                 coffee={cups}
                 water={water}
+                label={CupsLabel}
               >
               </Ingredients>
             </label>
@@ -116,10 +120,10 @@ const CupGrindInput = ({value, onChange, onSubmit}) =>
           </button>
         </form>
 
-const Ingredients = ({ coffee, water }) =>
+const Ingredients = ({ coffee, water, label }) =>
   <div className="ingredients">
-    <div className="coffee">
-      {coffee}g coffee (ground)
+    <div className="coffeeOrCups">
+      {coffee} {label}
     </div>
     <div className="water"> 
       {water}g water
