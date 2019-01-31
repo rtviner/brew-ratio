@@ -22,6 +22,7 @@ class App extends Component {
       goldenRatio: DefaultRatio,
       ingredients: '',
       error: null,
+      yes: false,
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
@@ -55,7 +56,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, ingredients} = this.state;
+    const { cups, ingredients, yes} = this.state;
     const coffee = (ingredients.coffee);
     const water = (ingredients.water);
 
@@ -66,41 +67,49 @@ class App extends Component {
         </header>
         <main>
           <div className="interactions">
-          <h2>How much brewed coffee would you like?</h2>
-            <label>Desired {CupsLabel}:
-              <CupGrindInput 
-                value={cups}
-                onChange={this.onSubmitChange}
-                onSubmit = {this.onCupsSubmit}
-              >
-              </CupGrindInput>
-            </label>   
+            <h2>Coffee beans running low?</h2>
+            <p>Check "yes" below if you have a random amount of ground coffee to brew.</p>
+            <p>Check "no" if you prefer to brew a specific number of cups.</p>
+            <RadioInput />
           </div>
-          <Ingredients
-            coffee={coffee}
-            water={water}
-            label={CoffeeGrindsLabel}
-          >
-          </Ingredients>
-          <div className="interactions">
-            <label>Coffee beans running low?
-              <RadioInput />
-            </label>          
-            <label>How much ground beans do you have (g)?
-              <CupGrindInput 
-                value={ingredients.coffee}
-                onChange={this.onSubmitChange}
-                onSubmit = {this.onCupsSubmit}
-              >
-              </CupGrindInput>
-              <Ingredients
-                coffee={cups}
-                water={water}
-                label={CupsLabel}
-              >
-              </Ingredients>
-            </label>
-          </div>
+          { yes 
+            ? <div className="grindsInput">
+                <div className="interactions">
+                  <label>How much ground beans do you have (g)?
+                    <CupGrindInput 
+                      value={ingredients.coffee}
+                      onChange={this.onSubmitChange}
+                      onSubmit = {this.onCupsSubmit}
+                    >
+                    </CupGrindInput>
+                  </label>
+                </div>  
+                <Ingredients
+                  coffee={cups}
+                  water={water}
+                  label={CupsLabel}
+                >
+                </Ingredients>
+              </div>  
+            : <div className="cupsInput">
+                <div className="interactions">
+                  <label>Desired {CupsLabel}:
+                    <CupGrindInput 
+                      value={cups}
+                      onChange={this.onSubmitChange}
+                      onSubmit = {this.onCupsSubmit}
+                    >
+                    </CupGrindInput>
+                  </label>   
+                </div>
+                <Ingredients
+                  coffee={coffee}
+                  water={water}
+                  label={CoffeeGrindsLabel}
+                >
+                </Ingredients>
+              </div>
+            }  
         </main>
       </div>
     );
