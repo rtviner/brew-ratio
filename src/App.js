@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 
 const DefaultCups = 2;
+const DefaultCoffee = 36;
+const DefaultWater = 560;
 const DefaultRatio = 15.5;
 const CoffeeGrindsLabel = "g coffee (ground)";
 const CupsLabel = "10oz cups"
 
-// input grams of water per 1 cup and desired cups (user input number) and output will be the number of grams of water required to make those desired cups
-// const WaterGrams = (cupSizeML = 280, desiredCups) => cupSizeML * desiredCups;
-//input waterGrams needed for desiredCups of coffee and goldenRatio (grams of water per 1 gram coffee) and outputs coffee grams required to make desired cups.
-// const CoffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
 //input coffeeGrams available (user input number) and goldenRatio and outPuts number of cups possible
 // const DesiredCups = (coffeeGrams, goldenRatio = 15) => coffeeGrams / goldenRatio;
 
@@ -18,32 +16,43 @@ class App extends Component {
     super(props);
 
     this.state = {
+      goldenRatio: DefaultRatio, 
       cups: DefaultCups,
-      goldenRatio: DefaultRatio,
-      ingredients: '',
+      coffee: DefaultCoffee,
+      water: DefaultWater, 
       error: null,
       selectedButton: 'no',
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
-    this.onCupsSubmit = this.onCupsSubmit.bind(this);
-    this.onButtonChange = this.onButtonChange.bind(this);
-  }
-
-  onButtonChange(event) {
-    this.setState({ selectedButton: event.target.value })
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmitChange(event) {
+    const target = event.target;
+    const value = event.target.value;
+    const name = target.name;
     //make sure input is a number here or post an error message
-    (isNaN(event.target.value)) ? this.setState({ cups: 0}): this.setState({ cups: event.target.value });
+    if (target.type === 'checkbox') {
+      this.setState({ selectedButton: value });
+    }
+    else {  
+      (isNaN(value)) 
+      ? this.setState({ [name]: 0})
+      : this.setState({ [name]: parseFloat(value) });
+    } 
   }
 
-  onCupsSubmit(event) {
+  onSubmit(event) {
     const { cups } = this.state;
     const { goldenRatio } = this.state;
     this.setIngredients(cups, goldenRatio); 
     event.preventDefault();
+  }
+
+  setCups(coffee, goldenRatio) {
+    const possibleCups = Math.round(coffee / goldenRatio);
+    this.setIngredients(possibleCups, goldenRatio);
   }
 
   setIngredients(cups, goldenRatio) {
@@ -53,17 +62,13 @@ class App extends Component {
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
 
     this.setState({
-      ingredients: {
         coffee: coffeeGrams,
         water: waterGrams
-      }
     });
   }
 
   render() {
-    const { cups, ingredients, selectedButton } = this.state;
-    const coffee = (ingredients.coffee);
-    const water = (ingredients.water);
+    const { cups, coffee, water, selectedButton } = this.state;
 
     return (
       <div className="App">
@@ -78,24 +83,25 @@ class App extends Component {
             <form>
               <RadioInput 
                 value="yes"
-                onChange={this.onButtonChange}
-                checked={this.state.selectedButton === 'yes'}
+                onChange={this.onSubmitChange}
+                checked={selectedButton === 'yes'}
               />
               <RadioInput 
                 value="no"
-                onChange={this.onButtonChange}
-                checked={this.state.selectedButton === 'no'}
+                onChange={this.onSubmitChange}
+                checked={selectedButton === 'no'}
               />
               </form>
           </div>
-          { (this.state.selectedButton === 'yes')
+          { (selectedButton === 'yes')
             ? <div className="grindsInput">
                 <div className="interactions">
                   <label>How much ground beans do you have (g)?
                     <CupGrindInput 
-                      value={ingredients.coffee}
+                      name={'coffee'}
+                      value={coffee}
                       onChange={this.onSubmitChange}
-                      onSubmit = {this.onCupsSubmit}
+                      onSubmit = {this.onSubmit}
                     >
                     </CupGrindInput>
                   </label>
@@ -111,9 +117,10 @@ class App extends Component {
                 <div className="interactions">
                   <label>Desired {CupsLabel}:
                     <CupGrindInput 
+                      name={'cups'}
                       value={cups}
                       onChange={this.onSubmitChange}
-                      onSubmit = {this.onCupsSubmit}
+                      onSubmit = {this.onSubmit}
                     >
                     </CupGrindInput>
                   </label>   
@@ -132,9 +139,10 @@ class App extends Component {
   }
 }
 
-const CupGrindInput = ({value, onChange, onSubmit}) =>
+const CupGrindInput = ({name, value, onChange, onSubmit}) =>
         <form onSubmit = {onSubmit}>
             <input
+              name={name}
               type="number"
               step=".01"
               value={value}
@@ -158,14 +166,14 @@ const Ingredients = ({ coffee, water, label }) =>
 const RadioInput = ({ value, onChange, checked }) =>
   <span className="radioButton">
     <input 
-      type="radio"
+      type="checkbox"
       id={value}
       name="coffeeLowQuestion"
       value={value}
       onChange={onChange}
-      deafaultChecked={checked}
+      checked={checked}
     />
-    <label for={value}>{value}</label>
+    <label htmlFor={value}>{value}</label>
   </span>
    
 
