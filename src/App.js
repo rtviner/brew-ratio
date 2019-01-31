@@ -64,35 +64,53 @@ class App extends Component {
         </header>
         <main>
           <div className="interactions">
-            <CupInput 
-              value={cups}
-              onChange={this.onSubmitChange}
-              onSubmit = {this.onCupsSubmit}
-            >
-            </CupInput>
+          <h2>How much brewed coffee would you like?</h2>
+            <label>Desired 10oz Cups:
+              <CupGrindInput 
+                value={cups}
+                onChange={this.onSubmitChange}
+                onSubmit = {this.onCupsSubmit}
+              >
+              </CupGrindInput>
+            </label>   
           </div>
           <Ingredients
             coffee={coffee}
             water={water}
           >
           </Ingredients>
+          <div className="interactions">
+            <label>Coffee beans running low?
+              <RadioInput />
+            </label>          
+            <label>How much ground beans do you have (g)?
+              <CupGrindInput 
+                value={ingredients.coffee}
+                onChange={this.onSubmitChange}
+                onSubmit = {this.onCupsSubmit}
+              >
+              </CupGrindInput>
+              <Ingredients
+                coffee={cups}
+                water={water}
+              >
+              </Ingredients>
+            </label>
+          </div>
         </main>
       </div>
     );
   }
 }
 
-const CupInput = ({value, onChange, onSubmit}) =>
+const CupGrindInput = ({value, onChange, onSubmit}) =>
         <form onSubmit = {onSubmit}>
-          <label>
-            Desired 10oz Cups:
             <input
               type="number"
               step=".01"
               value={value}
               onChange={onChange}
             />
-          </label>
           <button type="submit" >
             Submit
           </button>
@@ -107,5 +125,24 @@ const Ingredients = ({ coffee, water }) =>
       {water}g water
     </div>
   </div>
+
+const RadioInput = ({ value, onChange, onSubmit}) =>
+  <form>
+    <input 
+      type="radio"
+      id="yes"
+      name="coffeeLowQuestion"
+      value="yes"
+    />
+    <label for="yes">yes</label>
+    <input 
+      type="radio"
+      id="no"
+      name="coffeeLowQuestion"
+      value="no"
+      checked
+    />
+    <label for="no">no</label>
+  </form>
 
 export default App;
