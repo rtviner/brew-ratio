@@ -99,7 +99,7 @@ const CupInput = ({value, onChange, onSubmit}) =>
 const Ingredients = ({ coffee, water }) =>
   <div className="ingredients">
     <div className="coffee">
-      {coffee}g coffee
+      {coffee}g coffee (ground)
     </div>
     <div className="water"> 
       {water}g water
