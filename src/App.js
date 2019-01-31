@@ -22,11 +22,16 @@ class App extends Component {
       goldenRatio: DefaultRatio,
       ingredients: '',
       error: null,
-      yes: false,
+      yesButton: false,
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
     this.onCupsSubmit = this.onCupsSubmit.bind(this);
+    this.onButtonChange = this.onButtonChange.bind(this);
+  }
+
+  onButtonChange(event) {
+    this.setState({ yesButton: !this.state.yesButton })
   }
 
   onSubmitChange(event) {
@@ -56,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, ingredients, yes} = this.state;
+    const { cups, ingredients, yesButton } = this.state;
     const coffee = (ingredients.coffee);
     const water = (ingredients.water);
 
@@ -68,11 +73,20 @@ class App extends Component {
         <main>
           <div className="interactions">
             <h2>Coffee beans running low?</h2>
-            <p>Check "yes" below if you have a random amount of ground coffee to brew.</p>
+            <p>Check "yes" below if you have a random amount of ground coffee left to brew.</p>
             <p>Check "no" if you prefer to brew a specific number of cups.</p>
-            <RadioInput />
+            <RadioInput 
+              value="yes"
+              onChange={this.onButtonChange}
+              checked={false}
+            />
+            <RadioInput 
+              value="no"
+              onChange={this.onButtonChange}
+              checked={true}
+            />
           </div>
-          { yes 
+          { yesButton
             ? <div className="grindsInput">
                 <div className="interactions">
                   <label>How much ground beans do you have (g)?
@@ -139,23 +153,18 @@ const Ingredients = ({ coffee, water, label }) =>
     </div>
   </div>
 
-const RadioInput = ({ value, onChange, onSubmit}) =>
-  <form>
+const RadioInput = ({ value, onChange, checked }) =>
+  <span className="radioButton">
     <input 
       type="radio"
-      id="yes"
+      id={value}
       name="coffeeLowQuestion"
-      value="yes"
+      value={value}
+      onChange={onChange}
+      deafaultChecked={checked}
     />
-    <label for="yes">yes</label>
-    <input 
-      type="radio"
-      id="no"
-      name="coffeeLowQuestion"
-      value="no"
-      checked
-    />
-    <label for="no">no</label>
-  </form>
+    <label for={value}>{value}</label>
+  </span>
+   
 
 export default App;
