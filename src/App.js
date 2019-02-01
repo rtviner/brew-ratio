@@ -32,14 +32,11 @@ class App extends Component {
     const value = event.target.value;
     const name = target.name;
 
-    if (target.type === 'checkbox') {
-      this.setState({ selectedButton: value });
-    }
-    else {  
-      (isNaN(value)) 
+    (target.type === 'checkbox') 
+      ? this.setState({ selectedButton: value })
+      : (isNaN(value)) 
       ? this.setState({ [name]: 0})
       : this.setState({ [name]: parseFloat(value) });
-    } 
   }
 
   onSubmitCoffee(event) {
