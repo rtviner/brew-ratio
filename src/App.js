@@ -8,9 +8,6 @@ const DefaultRatio = 15.5;
 const CoffeeGrindsLabel = "g coffee (ground)";
 const CupsLabel = "10oz cups"
 
-//input coffeeGrams available (user input number) and goldenRatio and outPuts number of cups possible
-// const DesiredCups = (coffeeGrams, goldenRatio = 15) => coffeeGrams / goldenRatio;
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,14 +22,15 @@ class App extends Component {
     };
 
     this.onSubmitChange = this.onSubmitChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitCoffee = this.onSubmitCoffee.bind(this);
+    this.onSubmitCups = this.onSubmitCups.bind(this);
   }
 
   onSubmitChange(event) {
     const target = event.target;
     const value = event.target.value;
     const name = target.name;
-    //make sure input is a number here or post an error message
+
     if (target.type === 'checkbox') {
       this.setState({ selectedButton: value });
     }
@@ -43,25 +41,33 @@ class App extends Component {
     } 
   }
 
-  onSubmit(event) {
-    const { cups } = this.state;
-    const { goldenRatio } = this.state;
-    this.setIngredients(cups, goldenRatio); 
+  onSubmitCoffee(event) {
+    const { coffee, goldenRatio } = this.state;
+    this.setCups(coffee, goldenRatio);
+    event.preventDefault();
+  }
+
+  onSubmitCups(event) {
+    const { cups, goldenRatio } = this.state;
+    this.setIngredients(cups, goldenRatio);
     event.preventDefault();
   }
 
   setCups(coffee, goldenRatio) {
-    const possibleCups = Math.round(coffee / goldenRatio);
+    const possibleCups = parseFloat((coffee * goldenRatio) / 280, 2);
     this.setIngredients(possibleCups, goldenRatio);
   }
 
   setIngredients(cups, goldenRatio) {
+    console.log('goldenRatio at setIngredients:', goldenRatio)
+    console.log('possibleCups at setIngredients:', cups);
     const cupSize = 280;
     const waterGrams = Math.round(cupSize * cups);
-    // const coffeeGrams = (waterGrams, goldenRatio = 15) => waterGrams / goldenRatio;
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
+    console.log('coffee at setIngredients:', coffeeGrams);
 
     this.setState({
+        cups: cups,
         coffee: coffeeGrams,
         water: waterGrams
     });
@@ -98,10 +104,10 @@ class App extends Component {
                 <div className="interactions">
                   <label>How much ground beans do you have (g)?
                     <CupGrindInput 
-                      name={'coffee'}
+                      name='coffee'
                       value={coffee}
                       onChange={this.onSubmitChange}
-                      onSubmit = {this.onSubmit}
+                      onSubmit = {this.onSubmitCoffee}
                     >
                     </CupGrindInput>
                   </label>
@@ -117,10 +123,10 @@ class App extends Component {
                 <div className="interactions">
                   <label>Desired {CupsLabel}:
                     <CupGrindInput 
-                      name={'cups'}
+                      name='cups'
                       value={cups}
                       onChange={this.onSubmitChange}
-                      onSubmit = {this.onSubmit}
+                      onSubmit = {this.onSubmitCups}
                     >
                     </CupGrindInput>
                   </label>   
