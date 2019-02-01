@@ -6,7 +6,8 @@ const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = 15.5;
 const CoffeeGrindsLabel = "g coffee (ground)";
-const CupsLabel = "10oz cups"
+const CupsLabel = "10oz cups";
+
 
 class App extends Component {
   constructor(props) {
@@ -53,18 +54,16 @@ class App extends Component {
     event.preventDefault();
   }
 
-  setCups(coffee, goldenRatio) {
-    const possibleCups = parseFloat((coffee * goldenRatio) / 280, 2);
+  setCups(coffee, goldenRatio, cupSize = 280) {
+    //update possible cups to round to 1 decimal spot (1.5 cups instead of 1.4946428...)
+    const possibleCups = (coffee * goldenRatio) / cupSize;
     this.setIngredients(possibleCups, goldenRatio);
   }
 
-  setIngredients(cups, goldenRatio) {
-    console.log('goldenRatio at setIngredients:', goldenRatio)
-    console.log('possibleCups at setIngredients:', cups);
-    const cupSize = 280;
-    const waterGrams = Math.round(cupSize * cups);
+  setIngredients(cups, goldenRatio, cupSize=280) {
+
+    const waterGrams = Math.round(cups * cupSize);
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
-    console.log('coffee at setIngredients:', coffeeGrams);
 
     this.setState({
         cups: cups,
