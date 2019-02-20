@@ -34,7 +34,7 @@ class App extends Component {
 
     (target.type === 'checkbox') 
       ? this.setState({ selectedButton: value })
-      : (isNaN(value)) 
+      : (!value) //if empty string or 0 is submitted convert to value in state to 0
       ? this.setState({ [name]: 0})
       : this.setState({ [name]: parseFloat(value) });
   }
