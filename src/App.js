@@ -34,8 +34,8 @@ class App extends Component {
 
     (target.type === 'checkbox') 
       ? this.setState({ selectedButton: value })
-      : (!value) //if empty string or 0 is submitted convert to value in state to 0
-      ? this.setState({ [name]: 0})
+      : (!value) //if empty string is submitted set state value to zero***
+      ? this.setState({ [name]: ""})
       : this.setState({ [name]: parseFloat(value) });
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
 
   setCups(coffee, goldenRatio, cupSize = 280) {
     //update possible cups to round to 1 decimal spot (1.5 cups instead of 1.4946428...)
-    const possibleCups = (coffee * goldenRatio) / cupSize;
+    const possibleCups = ((coffee * goldenRatio) / cupSize).toFixed(1);
     this.setIngredients(possibleCups, goldenRatio);
   }
 
