@@ -52,13 +52,13 @@ class App extends Component {
   }
 
   setCups(coffee, goldenRatio, cupSize = 280) {
-    //update possible cups to round to 1 decimal spot (1.5 cups instead of 1.4946428...)
-    const possibleCups = ((coffee * goldenRatio) / cupSize).toFixed(1);
-    this.setIngredients(possibleCups, goldenRatio);
+    const possibleCups = (coffee * goldenRatio) / cupSize;
+    const roundedPossibleCups = Math.round(possibleCups * 4) / 4;
+
+    this.setIngredients(roundedPossibleCups, goldenRatio);
   }
 
-  setIngredients(cups, goldenRatio, cupSize=280) {
-
+  setIngredients(cups, goldenRatio, cupSize=280) {   
     const waterGrams = Math.round(cups * cupSize);
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
 
@@ -101,7 +101,6 @@ class App extends Component {
                   <label>How much ground beans do you have (g)?
                     <CupGrindInput 
                       name='coffee'
-                      value={coffee}
                       onChange={this.onSubmitChange}
                       onSubmit = {this.onSubmitCoffee}
                     >
@@ -120,7 +119,6 @@ class App extends Component {
                   <label>Desired {CupsLabel}:
                     <CupGrindInput 
                       name='cups'
-                      value={cups}
                       onChange={this.onSubmitChange}
                       onSubmit = {this.onSubmitCups}
                     >
@@ -141,13 +139,12 @@ class App extends Component {
   }
 }
 
-const CupGrindInput = ({name, value, onChange, onSubmit}) =>
+const CupGrindInput = ({name, onChange, onSubmit}) =>
         <form onSubmit = {onSubmit}>
             <input
               name={name}
               type="number"
               step=".01"
-              value={value}
               onChange={onChange}
             />
           <button type="submit" >
