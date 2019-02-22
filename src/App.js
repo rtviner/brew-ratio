@@ -19,24 +19,24 @@ class App extends Component {
       coffee: DefaultCoffee,
       water: DefaultWater, 
       error: null,
-      selectedButton: 'no',
+      coffeeLow: 'no',
     };
 
-    this.onSubmitChange = this.onSubmitChange.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.onSubmitCoffee = this.onSubmitCoffee.bind(this);
     this.onSubmitCups = this.onSubmitCups.bind(this);
   }
 
-  onSubmitChange(event) {
+  onClick(event) {
     const target = event.target;
     const value = event.target.value;
     const name = target.name;
 
-    (target.type === 'checkbox') 
-      ? this.setState({ selectedButton: value })
-      : (!value) //if empty string is submitted set state value to zero***
+    (target.type === 'button')
+      ? this.setState({ [name]: value })
+      : (!(value)) //if empty string is submitted set state value to zero***
       ? this.setState({ [name]: ""})
-      : this.setState({ [name]: parseFloat(value) });
+      : this.setState({ [name]: parseFloat(value)});
   }
 
   onSubmitCoffee(event) {
@@ -70,42 +70,74 @@ class App extends Component {
   }
 
   render() {
-    const { cups, coffee, water, selectedButton } = this.state;
+    const { cups, coffee, water, coffeeLow } = this.state;
 
     return (
+
       <div className="App">
         <header className="App-header">
           <h1>Brew Ratio</h1>
         </header>
+
         <main>
+
           <div className="interactions">
             <h2>Coffee beans running low?</h2>
-            <p>Check "yes" below if you have a random amount of ground coffee left to brew.</p>
-            <p>Check "no" if you prefer to brew a specific number of cups.</p>
+            <p>Click "yes" below if you have a random amount of ground coffee left to brew.</p>
+            <p>Click "no" if you prefer to brew a specific number of cups.</p>
             <form>
-              <RadioInput 
+              <ButtonInput
+                name="coffeeLow" 
                 value="yes"
-                onChange={this.onSubmitChange}
-                checked={selectedButton === 'yes'}
+                onClick={this.onClick}
               />
-              <RadioInput 
+              <ButtonInput 
+                name="coffeeLow"
                 value="no"
-                onChange={this.onSubmitChange}
-                checked={selectedButton === 'no'}
+                onClick={this.onClick}
               />
               </form>
           </div>
-          { (selectedButton === 'yes')
+
+          <div className="strengthInput">
+            <h3>Desired Strength</h3>
+            <form>
+              <ButtonInput
+                id="light"
+                name="goldenRatio"                
+                value="13"
+                onClick={this.onClick}
+              />
+              <label htmlFor="light">light</label>
+              <ButtonInput 
+                id="med"
+                name="goldenRatio"
+                value="15.5"
+                onClick={this.onClick}
+              />
+              <label htmlFor="med">medium</label>
+              <ButtonInput 
+                id="strong"
+                name="goldenRatio"
+                value="18"
+                onClick={this.onClick}
+              />
+              <label htmlFor="strong">strong</label>
+            </form>
+          </div>
+
+          { (coffeeLow === 'yes')
             ? <div className="grindsInput">
                 <div className="interactions">
-                  <label>How much ground beans do you have (g)?
+                  <label htmlFor="coffeeInput"><h3>Ground Coffee (g):</h3></label>
                     <CupGrindInput 
+                      id="coffeeInput"
                       name='coffee'
-                      onChange={this.onSubmitChange}
+                      onChange={this.onClick}
                       onSubmit = {this.onSubmitCoffee}
                     >
                     </CupGrindInput>
-                  </label>
+                  
                 </div>  
                 <Ingredients
                   coffee={cups}
@@ -116,14 +148,15 @@ class App extends Component {
               </div>  
             : <div className="cupsInput">
                 <div className="interactions">
-                  <label>Desired {CupsLabel}:
+                  <label htmlFor="cupsInput"><h3>Desired {CupsLabel}:</h3></label>
                     <CupGrindInput 
+                      id="cupsInput"
                       name='cups'
-                      onChange={this.onSubmitChange}
+                      onChange={this.onClick}
                       onSubmit = {this.onSubmitCups}
                     >
                     </CupGrindInput>
-                  </label>   
+                     
                 </div>
                 <Ingredients
                   coffee={coffee}
@@ -132,7 +165,10 @@ class App extends Component {
                 >
                 </Ingredients>
               </div>
-            }  
+            } 
+
+
+
         </main>
       </div>
     );
@@ -158,21 +194,20 @@ const Ingredients = ({ coffee, water, label }) =>
       {coffee} {label}
     </div>
     <div className="water"> 
-      {water}g water
+      {water} g water
     </div>
   </div>
 
-const RadioInput = ({ value, onChange, checked }) =>
-  <span className="radioButton">
-    <input 
-      type="checkbox"
+const ButtonInput = ({ name, value, onClick }) =>
+  <span className="button">
+    <input
+      type="button"
       id={value}
-      name="coffeeLowQuestion"
+      name={name}
       value={value}
-      onChange={onChange}
-      checked={checked}
+      onClick={onClick}
     />
-    <label htmlFor={value}>{value}</label>
+    
   </span>
    
 
