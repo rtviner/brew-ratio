@@ -41,13 +41,13 @@ class App extends Component {
 
   onSubmitCoffee(event) {
     const { coffee, goldenRatio } = this.state;
-    this.setCups(coffee, goldenRatio);
+    this.setCups(coffee, parseFloat(goldenRatio));
     event.preventDefault();
   }
 
   onSubmitCups(event) {
     const { cups, goldenRatio } = this.state;
-    this.setIngredients(cups, goldenRatio);
+    this.setIngredients(cups, parseFloat(goldenRatio));
     event.preventDefault();
   }
 
@@ -101,11 +101,11 @@ class App extends Component {
 
           <div className="strengthInput">
             <h3>Desired Strength</h3>
-            <form>
-              <ButtonInput
-                id="light"
-                name="goldenRatio"                
-                value="13"
+            <form>  
+              <ButtonInput 
+                id="strong"
+                name="goldenRatio"
+                value="18"
                 onClick={this.onClick}
               />
               <label htmlFor="light">light</label>
@@ -116,12 +116,13 @@ class App extends Component {
                 onClick={this.onClick}
               />
               <label htmlFor="med">medium</label>
-              <ButtonInput 
-                id="strong"
-                name="goldenRatio"
-                value="18"
+              <ButtonInput
+                id="light"
+                name="goldenRatio"                
+                value="13"
                 onClick={this.onClick}
               />
+
               <label htmlFor="strong">strong</label>
             </form>
           </div>
