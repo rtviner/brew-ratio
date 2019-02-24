@@ -81,52 +81,6 @@ class App extends Component {
 
         <main>
 
-          <div className="interactions">
-            <h2>Coffee beans running low?</h2>
-            <p>Click "yes" below if you have a random amount of ground coffee left to brew.</p>
-            <p>Click "no" if you prefer to brew a specific number of cups.</p>
-            <form>
-              <ButtonInput
-                name="coffeeLow" 
-                value="yes"
-                onClick={this.onClick}
-              />
-              <ButtonInput 
-                name="coffeeLow"
-                value="no"
-                onClick={this.onClick}
-              />
-              </form>
-          </div>
-
-          <div className="strengthInput">
-            <h3>Desired Strength</h3>
-            <form>  
-              <ButtonInput 
-                id="strong"
-                name="goldenRatio"
-                value="18"
-                onClick={this.onClick}
-              />
-              <label htmlFor="light">light</label>
-              <ButtonInput 
-                id="med"
-                name="goldenRatio"
-                value="15.5"
-                onClick={this.onClick}
-              />
-              <label htmlFor="med">medium</label>
-              <ButtonInput
-                id="light"
-                name="goldenRatio"                
-                value="13"
-                onClick={this.onClick}
-              />
-
-              <label htmlFor="strong">strong</label>
-            </form>
-          </div>
-
           { (coffeeLow === 'yes')
             ? <div className="grindsInput">
                 <div className="interactions">
@@ -168,7 +122,51 @@ class App extends Component {
               </div>
             } 
 
+          <div className="strengthInput">
+            <h3>Desired Strength</h3>
+            <form>  
+              <ButtonInput 
+                id="strong"
+                name="goldenRatio"
+                value="18"
+                onClick={this.onClick}
+              />
+              <label htmlFor="light">light</label>
+              <ButtonInput 
+                id="med"
+                name="goldenRatio"
+                value="15.5"
+                onClick={this.onClick}
+              />
+              <label htmlFor="med">medium</label>
+              <ButtonInput
+                id="light"
+                name="goldenRatio"                
+                value="13"
+                onClick={this.onClick}
+              />
 
+              <label htmlFor="strong">strong</label>
+            </form>
+          </div>
+
+          <div className="coffeeOrCupsInput">
+            <h2>Coffee beans running low?</h2>
+            <p>Click "yes" below if you have a random amount of ground coffee left to brew.</p>
+            <p>Click "no" if you prefer to brew a specific number of cups.</p>
+            <form>
+              <ButtonInput
+                name="coffeeLow" 
+                value="yes"
+                onClick={this.onClick}
+              />
+              <ButtonInput 
+                name="coffeeLow"
+                value="no"
+                onClick={this.onClick}
+              />
+              </form>
+          </div>
 
         </main>
       </div>
