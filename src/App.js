@@ -123,7 +123,7 @@ class App extends Component {
             } 
 
           <div className="strengthInput interactions">
-            <h2>Desired Strength</h2>
+            <h2>Coffee-to-Water Ratio</h2>
             <form>  
               <ButtonInput 
                 id="light"
