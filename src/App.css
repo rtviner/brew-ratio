@@ -7,6 +7,7 @@
 body {
 	/*background-color: #F1F0EA;	*/
 	background-color: #2f2f2f;
+	color: #fff;
 }
 
 .App-header {
@@ -25,21 +26,22 @@ main {
 	padding-top: 2rem;
 	font-size: 1.5rem;
 	margin: 0 auto;
-	background-color: #CFD11A;
+	background-color: #2f2f2f;
 }
 
 h2 {
 	font-size: 1.5rem;
-	color: #0D00A4;
+	color: #cfd11a;
 }
 
 input {
 	width: 90%;
 	max-width: 22em;
-	background-color: #2a2421;
+	background-color: #424242;
 	color: #fff;
 	font-size: 1.5rem;
-	border-radius: 5px;
+	border: 0;
+
 }
 
 form.CupGrindInput {
@@ -51,8 +53,8 @@ form.CupGrindInput {
 }
 
 input#coffeeInput, input#cupsInput {
-	background-color: #fff;
-	color: #000;
+	background-color: #424242;
+	color: #fff;
 	border: 1px solid #2a2421;
 	width: 45%;
 	height: 2.5rem;
@@ -63,15 +65,38 @@ input#coffeeInput, input#cupsInput {
 button {
 	width: 45%;
 	max-width: 22em;
-	background-color: #0D00A4;
+	background-color: #424242;
 	color: #fff;
 	font-size: 1.5rem;
-	border-radius: 5px;
+	border: 0;
 	padding: .5rem;
 }
 
+/*div.ingredients{
+	background-color: #fff;
+	width: 80%;
+	margin: 1rem auto;
+	padding-bottom: .75rem;
+	border: 2px solid #0D00A4;
+	border-radius: 10px;
+}*/
+
+div.ingredients h2 {
+	margin: .65rem;
+}
+
+div.coffeeOrCups {
+	border-bottom: 2px solid #0D00A4;
+	padding-bottom: .25rem;
+
+}
+
+div.water {
+	padding-top: .25rem;
+}
+
 input#yes, input#no {
-	background-color: #0D00A4;
+	background-color: #424242;
 	color: #fff;
 	margin-top: 1rem;
 }
