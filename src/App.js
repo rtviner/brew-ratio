@@ -95,6 +95,7 @@ class App extends Component {
                   
                 </div>  
                 <Ingredients
+
                   coffee={cups}
                   water={water}
                   label={CupsLabel}
@@ -123,7 +124,7 @@ class App extends Component {
             } 
 
           <div className="strengthInput interactions">
-            <h2>Coffee-to-Water Ratio</h2>
+            <h2>Coffee:1g Water</h2>
             <form>  
               <ButtonInput 
                 id="light"
@@ -177,7 +178,7 @@ class App extends Component {
 }
 
 const CupGrindInput = ({id, name, onChange, onSubmit}) =>
-        <form onSubmit = {onSubmit}>
+        <form className="CupGrindInput" onSubmit = {onSubmit}>
             <input
               id={id}
               name={name}
@@ -193,6 +194,7 @@ const CupGrindInput = ({id, name, onChange, onSubmit}) =>
 const Ingredients = ({ coffee, water, label }) =>
   <div className="ingredients">
     <div className="coffeeOrCups">
+      <h2>Ingredients</h2>
       {coffee} {label}
     </div>
     <div className="water"> 
