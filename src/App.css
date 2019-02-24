@@ -1,19 +1,61 @@
 .App {
   text-align: center;
+  font-size: 16px;
+  background-color: #CFD11A;
+}
+
+body {
+	background-color: #CFD11A;
 }
 
 .App-header {
-  background-color: #282c34;
-/*  min-height: 100vh;*/
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #2f2f2f;
+  text-align: center;
+  font-size: .5em;
+  color: #cfd11a;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+
+main {
+	padding-top: 2rem;
+	font-size: 1.5rem;
 }
 
+h2 {
+	font-size: 1.5rem;
+	color: #0D00A4;
+}
+
+input {
+	width: 90%;
+	max-width: 22em;
+	background-color: #2a2421;
+	color: #fff;
+	font-size: 1.5rem;
+	border-radius: 5px;
+}
+
+input#coffeeInput, input#cupsInput {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #2a2421;
+}
+
+button {
+	width: 90%;
+	max-width: 22em;
+	background-color: #0D00A4;;
+	color: #fff;
+	font-size: 1.5rem;
+	border-radius: 5px;
+	margin: 1rem;
+}
+
+input#yes, input#no {
+	background-color: #0D00A4;
+	color: #fff;
+	margin: 1rem;
+}

@@ -84,7 +84,7 @@ class App extends Component {
           { (coffeeLow === 'yes')
             ? <div className="grindsInput">
                 <div className="interactions">
-                  <label htmlFor="coffeeInput"><h3>Ground Coffee (g):</h3></label>
+                  <label htmlFor="coffeeInput"><h2>Ground Coffee (g):</h2></label>
                     <CupGrindInput 
                       id="coffeeInput"
                       name='coffee'
@@ -103,7 +103,7 @@ class App extends Component {
               </div>  
             : <div className="cupsInput">
                 <div className="interactions">
-                  <label htmlFor="cupsInput"><h3>Desired {CupsLabel}:</h3></label>
+                  <label htmlFor="cupsInput"><h2>Desired {CupsLabel}:</h2></label>
                     <CupGrindInput 
                       id="cupsInput"
                       name='cups'
@@ -122,11 +122,11 @@ class App extends Component {
               </div>
             } 
 
-          <div className="strengthInput">
-            <h3>Desired Strength</h3>
+          <div className="strengthInput interactions">
+            <h2>Desired Strength</h2>
             <form>  
               <ButtonInput 
-                id="strong"
+                id="light"
                 name="goldenRatio"
                 value="18"
                 onClick={this.onClick}
@@ -140,7 +140,7 @@ class App extends Component {
               />
               <label htmlFor="med">medium</label>
               <ButtonInput
-                id="light"
+                id="strong"
                 name="goldenRatio"                
                 value="13"
                 onClick={this.onClick}
@@ -156,11 +156,13 @@ class App extends Component {
             <p>Click "no" if you prefer to brew a specific number of cups.</p>
             <form>
               <ButtonInput
+                id="yes"
                 name="coffeeLow" 
                 value="yes"
                 onClick={this.onClick}
               />
               <ButtonInput 
+                id="no"
                 name="coffeeLow"
                 value="no"
                 onClick={this.onClick}
@@ -174,9 +176,10 @@ class App extends Component {
   }
 }
 
-const CupGrindInput = ({name, onChange, onSubmit}) =>
+const CupGrindInput = ({id, name, onChange, onSubmit}) =>
         <form onSubmit = {onSubmit}>
             <input
+              id={id}
               name={name}
               type="number"
               step=".01"
@@ -197,11 +200,11 @@ const Ingredients = ({ coffee, water, label }) =>
     </div>
   </div>
 
-const ButtonInput = ({ name, value, onClick }) =>
+const ButtonInput = ({ id, name, value, onClick }) =>
   <span className="button">
     <input
       type="button"
-      id={value}
+      id={id}
       name={name}
       value={value}
       onClick={onClick}
