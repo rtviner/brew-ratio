@@ -80,30 +80,25 @@ class App extends Component {
         </header>
 
         <main>
-        <h2>Desired Brew</h2>
+        <h2>Brew By</h2>
 
           <div className="coffeeOrCupsInput">
     
             <form className="CupOrGrind">
               <div className="CupOrGrind">
-                <label className="CupOrGrind" id="groundCoffee" htmlFor="yes">
-                  Coffee on hand
-                </label>
+
                 <ButtonInput
                   id="yes"
                   name="coffeeLow" 
-                  value="coffee(g)"
+                  value="Coffee on hand"
                   onClick={this.onClick}
                 />
               </div>
               <div className="CupOrGrind">
-                <label className="CupOrGrind" id="brewedCoffee" htmlFor="no">
-                  Servings desired
-                </label>
                 <ButtonInput 
                   id="no"
                   name="coffeeLow"
-                  value="cups(10oz)"
+                  value="Servings desired"
                   onClick={this.onClick}
                 />
               </div>
@@ -111,11 +106,11 @@ class App extends Component {
             </form>
           </div>
 
-          { (coffeeLow === 'coffee(g)')
+          { (coffeeLow === "Coffee on hand")
             ? <div className="grindsInput">
                 <div className="interactions labelInput">
                   <label className="CupOrGrind">
-                    Enter weight of ground coffee
+                    Enter weight of ground coffee (g)
                   </label>
                     <CupGrindInput 
                       id="coffeeInput"
@@ -135,7 +130,7 @@ class App extends Component {
             : <div className="cupsInput">
                 <div className="interactions">
                   <label className="CupOrGrind">
-                    Enter number of brewed servings
+                    Enter number of 10oz brewed servings
                   </label>
                     <CupGrindInput 
                       id="cupsInput"
