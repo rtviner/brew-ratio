@@ -100,7 +100,7 @@ class App extends Component {
               </form>
           </div>
 
-          { (coffeeLow === 'ground coffee')
+          { (coffeeLow === 'coffee(g)')
             ? <div className="grindsInput">
                 <div className="interactions">
                     <CupGrindInput 
