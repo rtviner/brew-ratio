@@ -36,30 +36,35 @@ h2 {
 	color: #cfd11a;
 }
 
-
-
 input {
-	width: 90%;
-	max-width: 22em;
+	max-width: 20em;
 	background-color: #424242;
 	color: #fff;
 	font-size: 1.5rem;
 	border: 0;
-
 }
 
-form.CupGrindInput {
+form.CupOrGrind {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
+
+}
+
+label.CupOrGrind {
+	font-size: .75rem;
+}
+
+div.coffeeOrCupsInput label {
+	display: block;
 }
 
 input#yes, input#no {
 	background-color: #424242;
 	color: #fff;
-	margin: 1rem auto;
+	margin: .25rem auto 1rem auto;
 	padding: .5em;
 	text-align: center;
 	width: 8em;
@@ -69,6 +74,7 @@ input#yes, input#no {
 input#yes{
 	margin-right: .5em;
 }
+
 
 input#no {
 	margin-left: .5em;
@@ -95,24 +101,32 @@ input#yes:focus, input#no:focus {
 	box-shadow:none;
 } 
 
+form.CupGrindInput {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 input#coffeeInput, input#cupsInput {
 	background-color: #424242;
 	color: #fff;
-	border: 1px solid #2a2421;
-	width: 45%;
-	height: 2.5rem;
-	margin-right: .75rem;
+	border: 1.5px solid #2a2421;
+	width: 100%;
+	height: 2.75rem;
 	text-align: center;
 }
 
 button {
-	width: 45%;
-	max-width: 22em;
+	width: 100%;
+	max-width: 20em;
 	background-color: #424242;
 	color: #fff;
 	font-size: 1.5rem;
 	border: 1px solid #424242;
 	padding: .5rem;
+	margin: .75rem;
 }
 
 button:hover {

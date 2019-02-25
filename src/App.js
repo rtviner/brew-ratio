@@ -80,29 +80,43 @@ class App extends Component {
         </header>
 
         <main>
-        <h2>Desired Brewed Coffee:</h2>
+        <h2>Desired Brew</h2>
 
           <div className="coffeeOrCupsInput">
- 
-            <form className="CupGrindInput">
-              <ButtonInput
-                id="yes"
-                name="coffeeLow" 
-                value="coffee(g)"
-                onClick={this.onClick}
-              />
-              <ButtonInput 
-                id="no"
-                name="coffeeLow"
-                value="cups(10oz)"
-                onClick={this.onClick}
-              />
-              </form>
+    
+            <form className="CupOrGrind">
+              <div className="CupOrGrind">
+                <label className="CupOrGrind" id="groundCoffee" htmlFor="yes">
+                  Coffee on hand
+                </label>
+                <ButtonInput
+                  id="yes"
+                  name="coffeeLow" 
+                  value="coffee(g)"
+                  onClick={this.onClick}
+                />
+              </div>
+              <div className="CupOrGrind">
+                <label className="CupOrGrind" id="brewedCoffee" htmlFor="no">
+                  Servings desired
+                </label>
+                <ButtonInput 
+                  id="no"
+                  name="coffeeLow"
+                  value="cups(10oz)"
+                  onClick={this.onClick}
+                />
+              </div>
+              
+            </form>
           </div>
 
           { (coffeeLow === 'coffee(g)')
             ? <div className="grindsInput">
-                <div className="interactions">
+                <div className="interactions labelInput">
+                  <label className="CupOrGrind">
+                    Enter weight of ground coffee
+                  </label>
                     <CupGrindInput 
                       id="coffeeInput"
                       name='coffee'
@@ -110,10 +124,8 @@ class App extends Component {
                       onSubmit = {this.onSubmitCoffee}
                     >
                     </CupGrindInput>
-                  
                 </div>  
                 <Ingredients
-
                   coffee={cups}
                   water={water}
                   label={CupsLabel}
@@ -122,6 +134,9 @@ class App extends Component {
               </div>  
             : <div className="cupsInput">
                 <div className="interactions">
+                  <label className="CupOrGrind">
+                    Enter number of brewed servings
+                  </label>
                     <CupGrindInput 
                       id="cupsInput"
                       name='cups'
@@ -129,6 +144,7 @@ class App extends Component {
                       onSubmit = {this.onSubmitCups}
                     >
                     </CupGrindInput>
+                  
                 </div>
 
                 <Ingredients
