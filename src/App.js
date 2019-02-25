@@ -19,7 +19,7 @@ class App extends Component {
       coffee: DefaultCoffee,
       water: DefaultWater, 
       error: null,
-      coffeeLow: 'no',
+      coffeeLow: 'Servings desired',
     };
 
     this.onClick = this.onClick.bind(this);
