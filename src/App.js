@@ -80,11 +80,29 @@ class App extends Component {
         </header>
 
         <main>
+        <h2>Desired Brewed Coffee:</h2>
 
-          { (coffeeLow === 'yes')
+          <div className="coffeeOrCupsInput">
+ 
+            <form className="CupGrindInput">
+              <ButtonInput
+                id="yes"
+                name="coffeeLow" 
+                value="coffee(g)"
+                onClick={this.onClick}
+              />
+              <ButtonInput 
+                id="no"
+                name="coffeeLow"
+                value="cups(10oz)"
+                onClick={this.onClick}
+              />
+              </form>
+          </div>
+
+          { (coffeeLow === 'ground coffee')
             ? <div className="grindsInput">
                 <div className="interactions">
-                  <label htmlFor="coffeeInput"><h2>Ground Coffee (g):</h2></label>
                     <CupGrindInput 
                       id="coffeeInput"
                       name='coffee'
@@ -104,7 +122,6 @@ class App extends Component {
               </div>  
             : <div className="cupsInput">
                 <div className="interactions">
-                  <label htmlFor="cupsInput"><h2>Desired {CupsLabel}:</h2></label>
                     <CupGrindInput 
                       id="cupsInput"
                       name='cups'
@@ -112,8 +129,8 @@ class App extends Component {
                       onSubmit = {this.onSubmitCups}
                     >
                     </CupGrindInput>
-                     
                 </div>
+
                 <Ingredients
                   coffee={coffee}
                   water={water}
@@ -154,31 +171,10 @@ class App extends Component {
                   value="13"
                   onClick={this.onClick}
                 />
-
                 <label class="strength" htmlFor="strong">strong</label>
               </div>
-              
-            </form>
-          </div>
 
-          <div className="coffeeOrCupsInput">
-            <h2>Coffee beans running low?</h2>
-            <p>Click "yes" below if you have a random amount of ground coffee left to brew.</p>
-            <p>Click "no" if you prefer to brew a specific number of cups.</p>
-            <form>
-              <ButtonInput
-                id="yes"
-                name="coffeeLow" 
-                value="yes"
-                onClick={this.onClick}
-              />
-              <ButtonInput 
-                id="no"
-                name="coffeeLow"
-                value="no"
-                onClick={this.onClick}
-              />
-              </form>
+            </form>
           </div>
 
         </main>

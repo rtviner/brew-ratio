@@ -36,6 +36,8 @@ h2 {
 	color: #cfd11a;
 }
 
+
+
 input {
 	width: 90%;
 	max-width: 22em;
@@ -53,6 +55,45 @@ form.CupGrindInput {
     align-items: center;
     width: 100%;
 }
+
+input#yes, input#no {
+	background-color: #424242;
+	color: #fff;
+	margin: 1rem auto;
+	padding: .5em;
+	text-align: center;
+	width: 8em;
+
+}
+
+input#yes{
+	margin-right: .5em;
+}
+
+input#no {
+	margin-left: .5em;
+}
+
+input#yes:hover, input#no:hover {
+	color: #0D00A4;
+	border: 1px solid #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+} 
+
+input#yes:active, input#no:active {
+	color: #0D00A4;
+	border: 1px solid #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+} 
+
+input#yes:focus, input#no:focus {
+	color: #0D00A4;
+	border: 1px solid #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+} 
 
 input#coffeeInput, input#cupsInput {
 	background-color: #424242;
@@ -175,33 +216,3 @@ input:focus {
 	box-shadow:none;
 }
 
-input#yes, input#no {
-	background-color: #424242;
-	color: #fff;
-	margin-top: 1rem;
-}
-
-input#no {
-	margin-bottom: .75rem;
-}
-
-input#yes:hover, input#no:hover {
-	color: #0D00A4;
-	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-} 
-
-input#yes:active, input#no:active {
-	color: #0D00A4;
-	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-} 
-
-input#yes:focus, input#no:focus {
-	color: #0D00A4;
-	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-} 
