@@ -18,6 +18,7 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
+  border-bottom: 1px solid #0D00A4;
 }
 
 
@@ -72,21 +73,18 @@ button {
 	padding: .5rem;
 }
 
-/*div.ingredients{
-	background-color: #fff;
-	width: 80%;
+div.ingredients {
 	margin: 1rem auto;
 	padding-bottom: .75rem;
-	border: 2px solid #0D00A4;
-	border-radius: 10px;
-}*/
+	border-bottom: 2px solid #424242;
+}
 
 div.ingredients h2 {
 	margin: .65rem;
 }
 
 div.coffeeOrCups {
-	border-bottom: 2px solid #0D00A4;
+	border-bottom: 2px solid #424242;
 	padding-bottom: .25rem;
 
 }

@@ -5,8 +5,8 @@ const DefaultCups = 2;
 const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = 15.5;
-const CoffeeGrindsLabel = "g coffee (ground)";
-const CupsLabel = "10oz cups";
+const CoffeeGrindsLabel = "g ground coffee";
+const CupsLabel = "10oz servings";
 
 
 class App extends Component {
