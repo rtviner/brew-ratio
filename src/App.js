@@ -125,29 +125,39 @@ class App extends Component {
 
           <div className="strengthInput interactions">
             <h2>Coffee:1g Water</h2>
-            <form>  
-              <ButtonInput 
-                id="light"
-                name="goldenRatio"
-                value="18"
-                onClick={this.onClick}
-              />
-              <label htmlFor="light">light</label>
-              <ButtonInput 
-                id="med"
-                name="goldenRatio"
-                value="15.5"
-                onClick={this.onClick}
-              />
-              <label htmlFor="med">medium</label>
-              <ButtonInput
-                id="strong"
-                name="goldenRatio"                
-                value="13"
-                onClick={this.onClick}
-              />
+            <form> 
 
-              <label htmlFor="strong">strong</label>
+              <div class="strength"> 
+                  <ButtonInput 
+                    id="light"
+                    name="goldenRatio"
+                    value="18"
+                    onClick={this.onClick}
+                  />
+                <label class="strength" htmlFor="light">light</label>
+              </div>
+
+              <div class="strength">
+                <ButtonInput 
+                  id="med"
+                  name="goldenRatio"
+                  value="15.5"
+                  onClick={this.onClick}
+                />
+                <label class="strength" htmlFor="med">medium</label>
+              </div>
+
+              <div class="strength">
+                <ButtonInput
+                  id="strong"
+                  name="goldenRatio"                
+                  value="13"
+                  onClick={this.onClick}
+                />
+
+                <label class="strength" htmlFor="strong">strong</label>
+              </div>
+              
             </form>
           </div>
 

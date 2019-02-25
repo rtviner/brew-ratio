@@ -93,6 +93,39 @@ div.water {
 	padding-top: .25rem;
 }
 
+div.strengthInput {
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	
+} 
+
+
+div.strengthInput h2 {
+	width: 100%;
+
+}
+
+div.strength {
+	width: 33%;
+	/*margin: 1rem;*/
+}
+
+div.strength label {
+	display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+}
+
+input#light, input#med, input#strong {
+	border-radius: 50%;
+	height: 4rem;
+    width: 4rem;
+}
+
 input#yes, input#no {
 	background-color: #424242;
 	color: #fff;
