@@ -19,7 +19,7 @@ class App extends Component {
       coffee: DefaultCoffee,
       water: DefaultWater, 
       error: null,
-      coffeeLow: 'Servings desired',
+      coffeeOrServings: 'Servings desired',
     };
 
     this.onClick = this.onClick.bind(this);
@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, coffee, water, coffeeLow } = this.state;
+    const { cups, coffee, water, coffeeOrServings } = this.state;
 
     return (
 
@@ -87,17 +87,19 @@ class App extends Component {
             <form className="CupOrGrind">
               <div className="CupOrGrind">
 
-                <ButtonInput
-                  id="yes"
-                  name="coffeeLow" 
+                <ButtonInput 
+                  className = {(coffeeOrServings === "Coffee on hand") ? "active" : "inactive"}
+                  id="coffee"
+                  name="coffeeOrServings" 
                   value="Coffee on hand"
                   onClick={this.onClick}
                 />
               </div>
               <div className="CupOrGrind">
                 <ButtonInput 
-                  id="no"
-                  name="coffeeLow"
+                  className = {(coffeeOrServings === "Servings desired") ? "active" : "inactive"}
+                  id="servings"
+                  name="coffeeOrServings"
                   value="Servings desired"
                   onClick={this.onClick}
                 />
@@ -106,7 +108,7 @@ class App extends Component {
             </form>
           </div>
 
-          { (coffeeLow === "Coffee on hand")
+          { (coffeeOrServings === "Coffee on hand")
             ? <div className="grindsInput">
                 <div className="interactions labelInput">
                   <label className="CupOrGrind">
@@ -162,7 +164,7 @@ class App extends Component {
                     value="18"
                     onClick={this.onClick}
                   />
-                <label class="strength" htmlFor="light">light</label>
+                <label className="strength" htmlFor="light">light</label>
               </div>
 
               <div className="strength">
@@ -172,7 +174,7 @@ class App extends Component {
                   value="15.5"
                   onClick={this.onClick}
                 />
-                <label class="strength" htmlFor="med">medium</label>
+                <label className="strength" htmlFor="med">medium</label>
               </div>
 
               <div className="strength">
@@ -182,7 +184,7 @@ class App extends Component {
                   value="13"
                   onClick={this.onClick}
                 />
-                <label class="strength" htmlFor="strong">strong</label>
+                <label className="strength" htmlFor="strong">strong</label>
               </div>
 
             </form>
@@ -219,9 +221,10 @@ const Ingredients = ({ coffee, water, label }) =>
     </div>
   </div>
 
-const ButtonInput = ({ id, name, value, onClick }) =>
+const ButtonInput = ({ className, id, name, value, onClick }) =>
   <span className="button">
     <input
+      className = {className}
       type="button"
       id={id}
       name={name}
@@ -229,6 +232,5 @@ const ButtonInput = ({ id, name, value, onClick }) =>
       onClick={onClick}
     />   
   </span>
-
 
 export default App;

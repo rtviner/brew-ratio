@@ -65,7 +65,7 @@ label.CupOrGrind {
 	font-size: .75rem;
 }
 
-input#yes, input#no {
+input#coffee, input#servings {
 	font-size: 1rem;
 	background-color: #424242;
 	color: #fff;
@@ -77,21 +77,28 @@ input#yes, input#no {
 	border-left: 2px solid #2a2421;
 }
 
-input#yes:hover, input#no:hover {
+input#coffee.inactive, input#servings.inactive {
+	background-color: #424242;
+	color: #fff;
+	border-right: 2px solid #2a2421;
+	border-left: 2px solid #2a2421;
+}
+
+input#coffee:hover, input#servings:hover {
 	color: #0D00A4;
 	border: 1px solid #0D00A4;
 	outline-style:none;
 	box-shadow:none;
 } 
 
-input#yes:active, input#no:active {
+input#coffee.active, input#servings.active {
 	color: #0D00A4;
 	border: 1px solid #0D00A4;
 	outline-style:none;
 	box-shadow:none;
 } 
 
-input#yes:focus, input#no:focus {
+input#coffee:focus, input#servings:focus {
 	color: #0D00A4;
 	border: 1px solid #0D00A4;
 	outline-style:none;
