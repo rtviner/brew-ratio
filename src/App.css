@@ -213,7 +213,7 @@ input:hover {
 	box-shadow:none;
 }
 
-input:active {
+input.active {
 	color: #0D00A4;
 	border: 2px solid #0D00A4;
 	outline-style:none;

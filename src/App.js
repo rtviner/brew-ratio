@@ -4,7 +4,7 @@ import './App.css';
 const DefaultCups = 2;
 const DefaultCoffee = 36;
 const DefaultWater = 560;
-const DefaultRatio = 15.5;
+const DefaultRatio = "15.5";
 const CoffeeGrindsLabel = "g ground coffee";
 const CupsLabel = "10oz servings";
 
@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, coffee, water, coffeeOrServings } = this.state;
+    const { cups, coffee, water, coffeeOrServings, goldenRatio } = this.state;
 
     return (
 
@@ -158,7 +158,8 @@ class App extends Component {
             <form> 
 
               <div className="strength"> 
-                  <ButtonInput 
+                  <ButtonInput
+                    className = {(goldenRatio === "18") ? "active" : "inactive"} 
                     id="light"
                     name="goldenRatio"
                     value="18"
@@ -168,7 +169,8 @@ class App extends Component {
               </div>
 
               <div className="strength">
-                <ButtonInput 
+                <ButtonInput
+                  className = {(goldenRatio === "15.5") ? "active" : "inactive"} 
                   id="med"
                   name="goldenRatio"
                   value="15.5"
@@ -179,6 +181,7 @@ class App extends Component {
 
               <div className="strength">
                 <ButtonInput
+                   className = {(goldenRatio === "13") ? "active" : "inactive"}
                   id="strong"
                   name="goldenRatio"                
                   value="13"
