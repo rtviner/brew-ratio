@@ -155,7 +155,7 @@ class App extends Component {
             <h2>Coffee:1g Water</h2>
             <form> 
 
-              <div class="strength"> 
+              <div className="strength"> 
                   <ButtonInput 
                     id="light"
                     name="goldenRatio"
@@ -165,7 +165,7 @@ class App extends Component {
                 <label class="strength" htmlFor="light">light</label>
               </div>
 
-              <div class="strength">
+              <div className="strength">
                 <ButtonInput 
                   id="med"
                   name="goldenRatio"
@@ -175,7 +175,7 @@ class App extends Component {
                 <label class="strength" htmlFor="med">medium</label>
               </div>
 
-              <div class="strength">
+              <div className="strength">
                 <ButtonInput
                   id="strong"
                   name="goldenRatio"                
@@ -227,9 +227,8 @@ const ButtonInput = ({ id, name, value, onClick }) =>
       name={name}
       value={value}
       onClick={onClick}
-    />
-    
+    />   
   </span>
-   
+
 
 export default App;

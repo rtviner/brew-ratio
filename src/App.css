@@ -46,6 +46,7 @@ input {
 	border: 0;
 }
 
+
 form {
     display: flex;
     flex-direction: row;
@@ -75,7 +76,6 @@ input#yes, input#no {
 	border-right: 2px solid #2a2421;
 	border-left: 2px solid #2a2421;
 }
-
 
 input#yes:hover, input#no:hover {
 	color: #0D00A4;
