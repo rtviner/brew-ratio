@@ -1,8 +1,6 @@
 .App {
   text-align: center;
   font-size: 16px;
-
-
 }
 
 body {
@@ -46,6 +44,31 @@ input {
 	border: 0;
 }
 
+input:hover {
+	border: 1px solid #0D00A4;
+	color: #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+}
+
+input.inactive {
+	background-color: #424242;
+	color: #fff;
+}
+
+input.active {
+	color: #0D00A4;
+	border: 1px solid #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+}
+
+input:focus {
+	border: 1px solid #0D00A4;
+	color: #0D00A4;
+	outline-style:none;
+	box-shadow:none;
+}
 
 form {
     display: flex;
@@ -67,42 +90,23 @@ label.CupOrGrind {
 
 input#coffee, input#servings {
 	font-size: 1rem;
-	background-color: #424242;
-	color: #fff;
 	margin: .25rem auto 1rem auto;
 	padding: .5em 2em;
-	text-align: center;
 	width: 100%;
-	border-right: 2px solid #2a2421;
-	border-left: 2px solid #2a2421;
 }
 
 input#coffee.inactive, input#servings.inactive {
-	background-color: #424242;
-	color: #fff;
 	border-right: 2px solid #2a2421;
 	border-left: 2px solid #2a2421;
 }
 
 input#coffee:hover, input#servings:hover {
-	color: #0D00A4;
 	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-} 
 
-input#coffee.active, input#servings.active {
-	color: #0D00A4;
-	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
 } 
 
 input#coffee:focus, input#servings:focus {
-	color: #0D00A4;
 	border: 1px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
 } 
 
 form.CupGrindInput {
@@ -181,7 +185,6 @@ div.strengthInput {
 	align-content: space-between;
 } 
 
-
 div.strengthInput h2 {
 	width: 100%;
 
@@ -191,13 +194,9 @@ div.strength {
 	width: 33%;
 }
 
-
-
 div.strength label {
 	display: block;
 }
-
-
 
 input#light, input#med, input#strong {
 	border-radius: 50%;
@@ -205,30 +204,10 @@ input#light, input#med, input#strong {
     width: 4rem;
 }
 
-
-input:hover {
-	border: 2px solid #0D00A4;
-	color: #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-}
-
-input.active {
-	color: #0D00A4;
-	border: 2px solid #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-}
-
 span.button:focus  {
 	outline-style:none;
 	box-shadow:none;
 }
 
-input:focus {
-	border: 2px solid #0D00A4;
-	color: #0D00A4;
-	outline-style:none;
-	box-shadow:none;
-}
+
 
