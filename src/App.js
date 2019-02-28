@@ -112,7 +112,7 @@ class App extends Component {
             ? <div className="grindsInput">
                 <div className="interactions labelInput">
                   <label className="CupOrGrind">
-                    Enter weight of ground coffee (g)
+                    Enter weight of coffee in grams
                   </label>
                     <CupGrindInput 
                       id="coffeeInput"
