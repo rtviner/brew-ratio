@@ -111,10 +111,8 @@ class App extends Component {
           { (coffeeOrServings === "Coffee on hand")
             ? <div className="grindsInput">
                 <div className="interactions labelInput">
-                  <label className="CupOrGrind">
-                    Enter weight of coffee in grams
-                  </label>
                     <CupGrindInput 
+                      label="Enter weight of coffee in grams"
                       id="coffeeInput"
                       name='coffee'
                       onChange={this.onClick}
@@ -131,10 +129,8 @@ class App extends Component {
               </div>  
             : <div className="cupsInput">
                 <div className="interactions">
-                  <label className="CupOrGrind">
-                    Enter number of 10oz brewed servings
-                  </label>
                     <CupGrindInput 
+                      label="Enter number of 10oz brewed servings"
                       id="cupsInput"
                       name='cups'
                       onChange={this.onClick}
@@ -199,8 +195,9 @@ class App extends Component {
   }
 }
 
-const CupGrindInput = ({id, name, onChange, onSubmit}) =>
+const CupGrindInput = ({label, id, name, onChange, onSubmit}) =>
         <form className="CupGrindInput" onSubmit = {onSubmit}>
+            <label className="CupOrGrind">{label}</label>
             <input
               id={id}
               name={name}

@@ -86,14 +86,16 @@ form.CupOrGrind {
 }
 
 label.CupOrGrind {
+	display: block;
 	font-size: .75rem;
+	margin: 0 auto;
 }
 
 input#coffee, input#servings {
 	font-size: 1rem;
 	margin: .25rem auto 1rem auto;
 	padding: .5em 2em;
-	width: 100%;
+	width: 12em;
 }
 
 input#coffee.inactive, input#servings.inactive {
@@ -103,13 +105,10 @@ input#coffee.inactive, input#servings.inactive {
 
 input#coffee:hover, input#servings:hover {
 	border: 1px solid #cfd11a;
-	/*color: #cfd11a;*/
-
 } 
 
 input#coffee:focus, input#servings:focus {
 	border: 1px solid #cfd11a;
-	/*color: #cfd11a;*/
 } 
 
 form.CupGrindInput {
@@ -127,6 +126,7 @@ input#coffeeInput, input#cupsInput {
 	width: 90%;
 	height: 2.75rem;
 	text-align: center;
+	margin-top: .25em;
 }
 
 button {
@@ -213,5 +213,32 @@ span.button:focus  {
 	box-shadow:none;
 }
 
+@media screen and (min-width: 720px) {
+	main {
+	    max-width: 60%;
+	}
 
+	form.CupOrGrind {
+	    justify-content: center;
+	}
 
+	input#coffee {
+		margin-right: 1.75em;
+	}
+
+	input#servings {
+		margin-left: 1.75em;
+	}
+
+	input#cupsInput, input#coffeeInput {
+		width: 12em;
+	}
+
+	button {
+		width: 12em;
+	}
+	div.strengthInput {
+		width: 80%;
+		margin: 0 auto;
+	} 
+}
