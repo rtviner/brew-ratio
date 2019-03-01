@@ -2,12 +2,13 @@
   "name": "brew-ratio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/rtviner/brew-ratio.git",
+  "homepage": "https://rtviner.github.io/brew-ratio/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.5",
+    "yarn": "^1.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,7 +17,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": "react-app"
