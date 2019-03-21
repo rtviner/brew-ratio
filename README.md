@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting Started
+Fork this repository by pressing the "fork" button in GitHub.  You should see a copy of the repository in your own GitHub account with "forked" underneath the project name.
+Next, create a local copy of the repository by pasting the following command into the terminal.
+$ git clone https://github.com/rtviner/brew-ratio.git
+Switch to the project's directory:
+$ cd brew-ratio
+Install all the dependencies:
+$ npm install
+Finally run the following command to open the app in your browser at http://localhost:3000.
+$ npm start
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -43,26 +54,3 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
