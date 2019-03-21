@@ -1,12 +1,14 @@
 # Brew Ratio
 
-![image](https://user-images.githubusercontent.com/34410968/54786919-c5d75000-4bef-11e9-95b6-76469b0964e8.png "Calculating ingredients needed for desired servings")
-
-![image](https://user-images.githubusercontent.com/34410968/54786856-94f71b00-4bef-11e9-9c97-cad7fb72ae79.png "Calculating water needed and serving possible with coffee amount left")
-
 ## Description
 
 Brew Ratio is a coffee recipe calculator that can be used to determine the appropriate amount of ground coffee and hot water (in grams) necessary to make the desired strength and number of servings of brewed coffee.  Alternatively, Brew Ratio can be used to determine the amount of hot water needed to brew the random amount of coffee beans left at the end of the bag.  Currently the app is designed for the pour over brew method specifically.
+
+Calculate the ingredients needed for the servings of brewed coffee desired:
+![image](https://user-images.githubusercontent.com/34410968/54787260-cf14ec80-4bf0-11e9-9285-17c6fb1e741d.png "Calculating ingredients needed for desired servings")
+
+Calculate the water needed and servings possible with random amount of coffee that is leftover:
+![image](https://user-images.githubusercontent.com/34410968/54787191-9412b900-4bf0-11e9-97bf-f3dfd03db90e.png "Calculating water needed and serving possible with coffee amount left")
 
 ### Why?  
 Sometimes math is hard, especially if no coffee has been consumed yet.  Also, I have been learning the JavaScript library, React, and wanted to create something to help solidify what I have learned.
