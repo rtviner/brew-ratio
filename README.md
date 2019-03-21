@@ -1,3 +1,12 @@
+# Brew Ratio
+
+## Description
+
+Brew Ratio is a coffee recipe calculator that can be used to determine the appropriate amount of ground coffee and hot water (in grams) necessary to make the desired strength and number of servings of brewed coffee.  Alternatively, Brew Ratio can be used to determine the amount of hot water needed to brew the random amount of coffee beans left at the end of the bag.
+
+###Why?  
+Sometimes math is hard, especially if no coffee has been consumed yet.  Also, I have been learning about React JS and wanted to create something to get some hands-on experience with the framework.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Getting Started
@@ -7,19 +16,19 @@ You should see a copy of the repository in your own GitHub account with "forked"
 
 2. Next, create a local copy of the repository by pasting the following command into the terminal.
 
-...```$ git clone https://github.com/rtviner/brew-ratio.git```
+    ```$ git clone https://github.com/rtviner/brew-ratio.git```
 
 3. Switch to the project's directory:
 
-...```$ cd brew-ratio```
+    ```$ cd brew-ratio```
 
 4. Install all the dependencies:
 
-...```$ npm install```
+    ```$ npm install```
 
 5. Finally run the following command to open the app in your browser at http://localhost:3000.
 
-...```$ npm start```
+    ```$ npm start```
 
 ## Available Scripts
 
