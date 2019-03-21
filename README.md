@@ -1,13 +1,19 @@
 # Brew Ratio
 
+<!-- add screenshots -->
+
 ## Description
 
-Brew Ratio is a coffee recipe calculator that can be used to determine the appropriate amount of ground coffee and hot water (in grams) necessary to make the desired strength and number of servings of brewed coffee.  Alternatively, Brew Ratio can be used to determine the amount of hot water needed to brew the random amount of coffee beans left at the end of the bag.
+Brew Ratio is a coffee recipe calculator that can be used to determine the appropriate amount of ground coffee and hot water (in grams) necessary to make the desired strength and number of servings of brewed coffee.  Alternatively, Brew Ratio can be used to determine the amount of hot water needed to brew the random amount of coffee beans left at the end of the bag.  Currently the app is designed for the pour over brew method specifically.
 
-###Why?  
-Sometimes math is hard, especially if no coffee has been consumed yet.  Also, I have been learning about React JS and wanted to create something to get some hands-on experience with the framework.
+### Why?  
+Sometimes math is hard, especially if no coffee has been consumed yet.  Also, I have been learning the JavaScript library, React, and wanted to create something to help solidify everything I was learning about React.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Demo
+
+The app can be viewed live here: https://rtviner.github.io/brew-ratio/
 
 ## Getting Started
 
@@ -22,7 +28,7 @@ You should see a copy of the repository in your own GitHub account with "forked"
 
     ```$ cd brew-ratio```
 
-4. Install all the dependencies:
+4. Install all the dependencies in package.json (checkout https://github.com/facebook/create-react-app "What's Included?" to see what is included with Create React App):
 
     ```$ npm install```
 
@@ -72,4 +78,44 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Folder Structure
+
+```
+brew-ratio/
+  README.md
+  node_modules/
+  package.json
+  public/
+    index.html
+    manifest.json
+  src/
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+ 	serviceWorker.js
+ ```
++ *index.html*: Contains div#root, the div which all the app components are loaded into.
++ *manifest.json*: Default Create React App Web App Manifest that can be customized to generate a Progressive Web App.
+
++ *App.css*: CSS styles for the App component.
++ *App.js*: File containing the App component, which contains all other components.  The JSX code for the app.
++ *App.test.js*: Tests for JSX code.
++ *index.css*: The CSS file corresponding to index.js
++ *index.js*: The JavaScript file corresponding to index.html which contains the command to render the App component in the root div.
++ *serviceWorker.js*: Default Create React App Service Worker that can be customized to generate a Progressive Web App.
+
+## To Do
+
+This app is still a work in progress... the following are some ideas for future renditions of Brew Ratio.
+- Add a timer and brewing instructions.
+- Add an iced coffee option.
+- Add different brew methods, AeroPress, French Press, and stovetop espresso makers.
+- Allow users to input their own preferred golden ratios for different strengths and save...
+
+
+
+
 
