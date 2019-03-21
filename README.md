@@ -2,7 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Getting Started
 
-Fork this repository by pressing the "fork" button in GitHub.  You should see a copy of the repository in your own GitHub account with "forked" underneath the project name.
+Fork this repository by pressing the "fork" button in GitHub.  
+You should see a copy of the repository in your own GitHub account with "forked" underneath the project name.
 
 Next, create a local copy of the repository by pasting the following command into the terminal.
 
