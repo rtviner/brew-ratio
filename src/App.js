@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { IncrementDecrementSet } from './increment.js';
 import './App.css';
 
 const DefaultCups = 2;
@@ -80,74 +81,25 @@ class App extends Component {
         </header>
 
         <main>
-        <h2>Brew By</h2>
-
-          <div className="coffeeOrCupsInput">
-    
-            <form className="CupOrGrind">
-              <div className="CupOrGrind">
-
-                <ButtonInput 
-                  className = {(coffeeOrServings === "Coffee on hand") ? "active" : "inactive"}
-                  id="coffee"
-                  name="coffeeOrServings" 
-                  value="Coffee on hand"
-                  onClick={this.onClick}
-                />
-              </div>
-              <div className="CupOrGrind">
-                <ButtonInput 
-                  className = {(coffeeOrServings === "Servings desired") ? "active" : "inactive"}
-                  id="servings"
-                  name="coffeeOrServings"
-                  value="Servings desired"
-                  onClick={this.onClick}
-                />
-              </div>
-              
-            </form>
+          <div id="adjustables">
+            <IncrementDecrementSet
+              name="servings"
+              title="Servings (8oz)"
+              interval={cups}
+              setIntervalTime={this.onSubmitCups}
+            />
+            <IncrementDecrementSet
+              name="coffee"
+              title="Ground Coffee (g)"
+              interval={coffee}
+              setIntervalTime={this.onSubmitWater}
+            />
+            <IncrementDecrementSet
+              name="water"
+              title="Water (g)"
+              interval={water}
+            />
           </div>
-
-          { (coffeeOrServings === "Coffee on hand")
-            ? <div className="grindsInput">
-                <div className="interactions labelInput">
-                    <CupGrindInput 
-                      label="Enter weight of coffee in grams"
-                      id="coffeeInput"
-                      name='coffee'
-                      onChange={this.onClick}
-                      onSubmit = {this.onSubmitCoffee}
-                    >
-                    </CupGrindInput>
-                </div>  
-                <Ingredients
-                  coffee={cups}
-                  water={water}
-                  label={CupsLabel}
-                >
-                </Ingredients>
-              </div>  
-            : <div className="cupsInput">
-                <div className="interactions">
-                    <CupGrindInput 
-                      label="Enter number of 10oz brewed servings"
-                      id="cupsInput"
-                      name='cups'
-                      onChange={this.onClick}
-                      onSubmit = {this.onSubmitCups}
-                    >
-                    </CupGrindInput>
-                  
-                </div>
-
-                <Ingredients
-                  coffee={coffee}
-                  water={water}
-                  label={CoffeeGrindsLabel}
-                >
-                </Ingredients>
-              </div>
-            } 
 
           <div className="strengthInput interactions">
             <h2>Coffee:1g Water</h2>
