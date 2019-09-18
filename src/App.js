@@ -6,9 +6,6 @@ const DefaultCups = 2;
 const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = "15.5";
-const CoffeeGrindsLabel = "g ground coffee";
-const CupsLabel = "10oz servings";
-
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +17,6 @@ class App extends Component {
       coffee: DefaultCoffee,
       water: DefaultWater, 
       error: null,
-      coffeeOrServings: 'Servings desired',
     };
 
     this.onClick = this.onClick.bind(this);
@@ -71,7 +67,7 @@ class App extends Component {
   }
 
   render() {
-    const { cups, coffee, water, coffeeOrServings, goldenRatio } = this.state;
+    const { cups, coffee, water, goldenRatio } = this.state;
 
     return (
 
@@ -146,32 +142,6 @@ class App extends Component {
     );
   }
 }
-
-const CupGrindInput = ({label, id, name, onChange, onSubmit}) =>
-        <form className="CupGrindInput" onSubmit = {onSubmit}>
-            <label className="CupOrGrind">{label}</label>
-            <input
-              id={id}
-              name={name}
-              type="number"
-              step=".01"
-              onChange={onChange}
-            />
-          <button type="submit" >
-            Submit
-          </button>
-        </form>
-
-const Ingredients = ({ coffee, water, label }) =>
-  <div className="ingredients">
-    <div className="coffeeOrCups">
-      <h2>Ingredients</h2>
-      {coffee} {label}
-    </div>
-    <div className="water"> 
-      {water} g water
-    </div>
-  </div>
 
 const ButtonInput = ({ className, id, name, value, onClick }) =>
   <span className="button">
