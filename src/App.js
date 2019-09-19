@@ -3,7 +3,7 @@ import { IncrementDecrementSet } from './increment.js';
 import { InputButton } from "./inputButton.js";
 import './App.css';
 
-const DefaultServings = 2;
+const DefaultBrewAmt = 20;
 const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = "15.5";
@@ -14,7 +14,7 @@ class App extends Component {
 
     this.state = {
       goldenRatio: DefaultRatio, 
-      servings: DefaultServings,
+      brewAmount: DefaultBrewAmt,
       coffeeGrams: DefaultCoffee,
       waterGrams: DefaultWater, 
       error: null,
@@ -24,30 +24,23 @@ class App extends Component {
 
   }
 
-  setQuantity (event) {
-    console.log(event.target);
 
-    // const { servings, coffeeGrams, waterGrams, goldenRatio } = this.state;
+  setQuantity (event) {
     const eventInfo = event.target.id.split("-");
     const name = eventInfo[0];
     const currentQuantity  = this.state[name];
+    let newQuantity;
 
-    console.log("eventInfo:", eventInfo, "currentQuantity:", currentQuantity);
+    if (eventInfo[1] === "increment" ) {
+      newQuantity = currentQuantity + 1;
+    }
+
+    if (eventInfo[1] === "decrement" && currentQuantity > 1) {
+      newQuantity = currentQuantity - 1;
+    }
+    this.setState({ [name]: newQuantity });
+    //Need to recalculate and update other two quantity states that are not name too
   }
-
-// this is used only for golden ratio right now not working for other inputs...
-  // onClick(event) {
-  //   const target = event.target;
-  //   const value = event.target.value;
-  //   const name = target.name;
-  //   console.log("target:", target, "value:", value, name);
-
-  //   (target.type === 'button')
-  //     ? this.setState({ [name]: value })
-  //     : (!(value)) //if empty string is submitted set state value to zero***
-  //     ? this.setState({ [name]: ""})
-  //     : this.setState({ [name]: parseFloat(value)});
-  // }
 
 //no longer a submit button
 
@@ -65,7 +58,7 @@ class App extends Component {
 //   }
 
 //this is not being called right now
-  setServings(coffeeGrams, goldenRatio, servingSize = 280) {
+  setBrewAmount(coffeeGrams, goldenRatio, servingSize = 280) {
     const possibleServings = (coffeeGrams * goldenRatio) / servingSize;
     const roundedPossibleServings = Math.round(possibleServings * 4) / 4;
 
@@ -73,19 +66,19 @@ class App extends Component {
   }
 
 //this is not being called right now
-  setIngredients(servings, goldenRatio, servingSize=280) {   
-    const waterGrams = Math.round(servings * servingSize);
+  setIngredients(brewAmount, goldenRatio, servingSize=280) {   
+    const waterGrams = Math.round(brewAmount * servingSize);
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
 
     this.setState({
-        servings: servings,
+        brewAmount: brewAmount,
         coffeeGrams: coffeeGrams,
         waterGrams: waterGrams
     });
   }
 
   render() {
-    const { servings, coffeeGrams, waterGrams, goldenRatio } = this.state;
+    const { brewAmount, coffeeGrams, waterGrams, goldenRatio } = this.state;
 
     return (
 
@@ -97,19 +90,19 @@ class App extends Component {
         <main>
           <div id="adjustables">
             <IncrementDecrementSet
-              name="servings"
-              title="Servings"
-              value={`${servings} (oz)`}
+              name="brewAmount"
+              title="Brew Amount"
+              value={`${brewAmount} (oz)`}
               setQuantity={this.setQuantity}
             />
             <IncrementDecrementSet
-              name="coffee"
+              name="coffeeGrams"
               title="Ground Coffee"
               value={`${coffeeGrams} (g)`}
               setQuantity={this.setQuantity}
             />
             <IncrementDecrementSet
-              name="water"
+              name="waterGrams"
               title="Water"
               value={`${waterGrams} (g/mL)`}
               setQuantity={this.setQuantity}
