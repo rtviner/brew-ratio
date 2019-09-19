@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { IncrementDecrementSet } from './increment.js';
+import { InputButton } from "./inputButton.js";
 import './App.css';
 
-const DefaultCups = 2;
+const DefaultServings = 2;
 const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = "15.5";
@@ -13,61 +14,78 @@ class App extends Component {
 
     this.state = {
       goldenRatio: DefaultRatio, 
-      cups: DefaultCups,
-      coffee: DefaultCoffee,
-      water: DefaultWater, 
+      servings: DefaultServings,
+      coffeeGrams: DefaultCoffee,
+      waterGrams: DefaultWater, 
       error: null,
     };
 
-    this.onClick = this.onClick.bind(this);
-    this.onSubmitCoffee = this.onSubmitCoffee.bind(this);
-    this.onSubmitCups = this.onSubmitCups.bind(this);
+    this.setQuantity = this.setQuantity.bind(this);
+
   }
 
-  onClick(event) {
-    const target = event.target;
-    const value = event.target.value;
-    const name = target.name;
+  setQuantity (event) {
+    console.log(event.target);
 
-    (target.type === 'button')
-      ? this.setState({ [name]: value })
-      : (!(value)) //if empty string is submitted set state value to zero***
-      ? this.setState({ [name]: ""})
-      : this.setState({ [name]: parseFloat(value)});
+    // const { servings, coffeeGrams, waterGrams, goldenRatio } = this.state;
+    const eventInfo = event.target.id.split("-");
+    const name = eventInfo[0];
+    const currentQuantity  = this.state[name];
+
+    console.log("eventInfo:", eventInfo, "currentQuantity:", currentQuantity);
   }
 
-  onSubmitCoffee(event) {
-    const { coffee, goldenRatio } = this.state;
-    this.setCups(coffee, parseFloat(goldenRatio));
-    event.preventDefault();
+// this is used only for golden ratio right now not working for other inputs...
+  // onClick(event) {
+  //   const target = event.target;
+  //   const value = event.target.value;
+  //   const name = target.name;
+  //   console.log("target:", target, "value:", value, name);
+
+  //   (target.type === 'button')
+  //     ? this.setState({ [name]: value })
+  //     : (!(value)) //if empty string is submitted set state value to zero***
+  //     ? this.setState({ [name]: ""})
+  //     : this.setState({ [name]: parseFloat(value)});
+  // }
+
+//no longer a submit button
+
+//   onSubmitCoffee(event) {
+//     const { coffeeGrams, goldenRatio } = this.state;
+//     this.setServings(coffeeGrams, parseFloat(goldenRatio));
+//     event.preventDefault();
+//   }
+
+// //no longer a submit button
+//   onSubmitServings(event) {
+//     const { servings, goldenRatio } = this.state;
+//     this.setIngredients(servings, parseFloat(goldenRatio));
+//     event.preventDefault();
+//   }
+
+//this is not being called right now
+  setServings(coffeeGrams, goldenRatio, servingSize = 280) {
+    const possibleServings = (coffeeGrams * goldenRatio) / servingSize;
+    const roundedPossibleServings = Math.round(possibleServings * 4) / 4;
+
+    this.setIngredients(roundedPossibleServings, goldenRatio);
   }
 
-  onSubmitCups(event) {
-    const { cups, goldenRatio } = this.state;
-    this.setIngredients(cups, parseFloat(goldenRatio));
-    event.preventDefault();
-  }
-
-  setCups(coffee, goldenRatio, cupSize = 280) {
-    const possibleCups = (coffee * goldenRatio) / cupSize;
-    const roundedPossibleCups = Math.round(possibleCups * 4) / 4;
-
-    this.setIngredients(roundedPossibleCups, goldenRatio);
-  }
-
-  setIngredients(cups, goldenRatio, cupSize=280) {   
-    const waterGrams = Math.round(cups * cupSize);
+//this is not being called right now
+  setIngredients(servings, goldenRatio, servingSize=280) {   
+    const waterGrams = Math.round(servings * servingSize);
     const coffeeGrams = Math.round(waterGrams / goldenRatio);
 
     this.setState({
-        cups: cups,
-        coffee: coffeeGrams,
-        water: waterGrams
+        servings: servings,
+        coffeeGrams: coffeeGrams,
+        waterGrams: waterGrams
     });
   }
 
   render() {
-    const { cups, coffee, water, goldenRatio } = this.state;
+    const { servings, coffeeGrams, waterGrams, goldenRatio } = this.state;
 
     return (
 
@@ -80,56 +98,57 @@ class App extends Component {
           <div id="adjustables">
             <IncrementDecrementSet
               name="servings"
-              title="Servings (8oz)"
-              interval={cups}
-              setIntervalTime={this.onSubmitCups}
+              title="Servings"
+              value={`${servings} (oz)`}
+              setQuantity={this.setQuantity}
             />
             <IncrementDecrementSet
               name="coffee"
-              title="Ground Coffee (g)"
-              interval={coffee}
-              setIntervalTime={this.onSubmitWater}
+              title="Ground Coffee"
+              value={`${coffeeGrams} (g)`}
+              setQuantity={this.setQuantity}
             />
             <IncrementDecrementSet
               name="water"
-              title="Water (g)"
-              interval={water}
+              title="Water"
+              value={`${waterGrams} (g/mL)`}
+              setQuantity={this.setQuantity}
             />
           </div>
 
           <div className="strengthInput interactions">
-            <h2>Coffee:1g Water</h2>
+            <h2>g Coffee:1g Water</h2>
             <form> 
 
               <div className="strength"> 
-                  <ButtonInput
+                  <InputButton
                     className = {(goldenRatio === "18") ? "active" : "inactive"} 
                     id="light"
                     name="goldenRatio"
                     value="18"
-                    onClick={this.onClick}
+                    onClick={this.setQuantity}
                   />
                 <label className="strength" htmlFor="light">light</label>
               </div>
 
               <div className="strength">
-                <ButtonInput
+                <InputButton
                   className = {(goldenRatio === "15.5") ? "active" : "inactive"} 
                   id="med"
                   name="goldenRatio"
                   value="15.5"
-                  onClick={this.onClick}
+                  onClick={this.setQuantity}
                 />
                 <label className="strength" htmlFor="med">medium</label>
               </div>
 
               <div className="strength">
-                <ButtonInput
+                <InputButton
                    className = {(goldenRatio === "13") ? "active" : "inactive"}
                   id="strong"
                   name="goldenRatio"                
                   value="13"
-                  onClick={this.onClick}
+                  onClick={this.setQuantity}
                 />
                 <label className="strength" htmlFor="strong">strong</label>
               </div>
@@ -142,17 +161,5 @@ class App extends Component {
     );
   }
 }
-
-const ButtonInput = ({ className, id, name, value, onClick }) =>
-  <span className="button">
-    <input
-      className = {className}
-      type="button"
-      id={id}
-      name={name}
-      value={value}
-      onClick={onClick}
-    />   
-  </span>
 
 export default App;
