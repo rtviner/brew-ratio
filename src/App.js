@@ -151,7 +151,7 @@ class App extends Component {
               name="waterGrams"
               title="Water"
               value={waterGrams}
-              measure="g/mL"
+              measure="mL or g"
               setQuantity=
                 {this.updateQuantity}
             />
