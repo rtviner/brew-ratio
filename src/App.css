@@ -35,6 +35,19 @@ h2 {
 	color: #cfd11a;
 	margin-bottom: .5rem;
 }
+input[type=number] {
+	max-width: 3em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+p.measure {
+    display: inline-block;
+}
 
 input {
 	max-width: 20em;
