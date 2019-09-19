@@ -26,6 +26,7 @@ const IncrementDecrementSet = ({ name, title, value, measure, setQuantity }) => 
                 type="number" 
                 value={value}
                 id={`${name}-amount`}
+                onChange={setQuantity}
             />
             <p className="measure">{measure}</p>
             <div className="increment">
