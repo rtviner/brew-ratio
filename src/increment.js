@@ -18,11 +18,16 @@ IncrementOrDecrementButton.propTypes = {
     text: PropTypes.string
 };
 
-const IncrementDecrementSet = ({ name, title, value, setQuantity }) => (
+const IncrementDecrementSet = ({ name, title, value, measure, setQuantity }) => (
     <div className="incrementDecrement" id={`${name}-label`}>
         <h2>{title}</h2>
         <div className="interactions">
-            <div id={`${name}-amount`}> {value} </div>
+            <input 
+                type="number" 
+                value={value}
+                id={`${name}-amount`}
+            />
+            <p className="measure">{measure}</p>
             <div className="increment">
                 <IncrementOrDecrementButton
                     id={`${name}-increment`}
@@ -42,7 +47,8 @@ const IncrementDecrementSet = ({ name, title, value, setQuantity }) => (
 IncrementDecrementSet.propTypes = {
     name: PropTypes.string,
     title: PropTypes.string,
-    interval: PropTypes.number,
+    value: PropTypes.number,
+    measure: PropTypes.string,
     setQuantity: PropTypes.func
 };
 
