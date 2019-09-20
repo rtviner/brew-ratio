@@ -4,9 +4,9 @@ import { InputButton } from "./inputButton.js";
 import './App.css';
 
 const DefaultCups = 2;
-const DefaultBrewAmt = 20;
-const DefaultCoffee = 38;
-const DefaultWater = 592;
+// const DefaultBrewAmt = 20;
+const DefaultCoffee = 36;
+const DefaultWater = 560;
 const DefaultRatio = "15.5";
 const waterGramsPerOz = 29.574;
 
@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       goldenRatio: DefaultRatio,
       cups: DefaultCups,
-      brewAmount: DefaultBrewAmt,
+      // brewAmount: DefaultBrewAmt,
       coffeeGrams: DefaultCoffee,
       waterGrams: DefaultWater, 
       error: null,
@@ -120,7 +120,7 @@ class App extends Component {
 //   }
 
   render() {
-    const { brewAmount, coffeeGrams, waterGrams, goldenRatio } = this.state;
+    const { cups, coffeeGrams, waterGrams, goldenRatio } = this.state;
 
     return (
 
@@ -132,10 +132,10 @@ class App extends Component {
         <main>
           <div id="adjustables">
             <IncrementDecrementSet
-              name="brewAmount"
-              title="Brew Amount"
-              value={brewAmount}
-              measure="oz"
+              name="cups"
+              title="cups"
+              value={cups}
+              measure="x 8oz"
               setQuantity=
                 {this.updateQuantity}
             />
