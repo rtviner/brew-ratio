@@ -24,6 +24,7 @@ const IncrementDecrementSet = ({ name, title, value, measure, setQuantity }) => 
         <div className="interactions">
             <input 
                 type="number" 
+                min="0"
                 value={value}
                 id={`${name}-amount`}
                 onChange={setQuantity}
