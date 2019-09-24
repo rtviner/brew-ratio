@@ -22,7 +22,6 @@ body {
   border-bottom: 1px solid #0D00A4;
 }
 
-
 main {
 	padding-top: 2rem;
 	font-size: 1.5rem;
@@ -37,7 +36,7 @@ h2 {
 }
 
 input[type=number] {
-	  max-width: 3rem;
+	  max-width: 3.65rem;
     text-align: center;
     font-size: 1.5rem;
     padding: .5em;
