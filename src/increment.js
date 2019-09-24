@@ -18,7 +18,7 @@ IncrementOrDecrementButton.propTypes = {
     text: PropTypes.string
 };
 
-const IncrementDecrementSet = ({ name, title, value, measure, setQuantity }) => (
+const IncrementDecrementSet = ({ name, title, value, measure, changeQuantity }) => (
     <div className="incrementDecrement" id={`${name}-label`}>
         <h2>{title}</h2>
         <div className="interactions">
@@ -27,19 +27,19 @@ const IncrementDecrementSet = ({ name, title, value, measure, setQuantity }) => 
                 min="0"
                 value={value}
                 id={`${name}-amount`}
-                onChange={setQuantity}
+                onChange={changeQuantity}
             />
             <p className="measure">{measure}</p>
             <div className="increment">
                 <IncrementOrDecrementButton
                     id={`${name}-increment`}
                     text="+"
-                    onClick={setQuantity}
+                    onClick={changeQuantity}
                 />
                 <IncrementOrDecrementButton
                     id={`${name}-decrement`}
                     text="-"
-                    onClick={setQuantity}
+                    onClick={changeQuantity}
                 />
             </div>
         </div>
