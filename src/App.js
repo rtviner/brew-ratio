@@ -4,7 +4,7 @@ import { InputButton } from './inputButton.js'
 import './App.css'
 
 const DefaultWater = 558
-const DefaultRatio = '15.5'
+const DefaultRatio = 15.5
 
 class App extends Component {
   constructor(props) {
@@ -37,12 +37,12 @@ class App extends Component {
       }
     } else if (eventInfo[0] === 'coffeeGrams') {
       if (eventInfo[1] === 'amount') {
-        newWater = value * parseFloat(goldenRatio)
+        newWater = value * goldenRatio
       } else {
         newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= parseFloat(goldenRatio)
-            ? value - parseFloat(goldenRatio)
-            : value + parseFloat(goldenRatio)
+          eventInfo[1] === 'decrement' && waterGrams >= goldenRatio
+            ? value - goldenRatio
+            : value + goldenRatio
       }
     } else if (eventInfo[0] === 'waterGrams') {
       if (eventInfo[1] === 'amount') {
@@ -58,7 +58,9 @@ class App extends Component {
   }
 
   setGoldenRatio(event) {
-    console.log(event)
+    this.setState({
+      goldenRatio: parseFloat(event.target.value),
+    })
   }
 
   render() {
@@ -110,7 +112,7 @@ class App extends Component {
             <form>
               <div className="strength">
                 <InputButton
-                  className={goldenRatio === '18' ? 'active' : 'inactive'}
+                  className={goldenRatio === 18 ? 'active' : 'inactive'}
                   id="light"
                   name="goldenRatio"
                   value="18"
@@ -123,7 +125,7 @@ class App extends Component {
 
               <div className="strength">
                 <InputButton
-                  className={goldenRatio === '15.5' ? 'active' : 'inactive'}
+                  className={goldenRatio === 15.5 ? 'active' : 'inactive'}
                   id="med"
                   name="goldenRatio"
                   value="15.5"
@@ -136,7 +138,7 @@ class App extends Component {
 
               <div className="strength">
                 <InputButton
-                  className={goldenRatio === '13' ? 'active' : 'inactive'}
+                  className={goldenRatio === 13 ? 'active' : 'inactive'}
                   id="strong"
                   name="goldenRatio"
                   value="13"
