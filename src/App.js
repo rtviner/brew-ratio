@@ -3,7 +3,7 @@ import { IncrementDecrementSet } from './increment.js';
 import { InputButton } from "./inputButton.js";
 import './App.css';
 
-const DefaultWater = 560;
+const DefaultWater = 558;
 const DefaultRatio = "15.5";
 
 class App extends Component {
@@ -25,24 +25,43 @@ class App extends Component {
   updateWater (event) {
     const { waterGrams, goldenRatio } = this.state;
     const eventInfo = event.target.id.split("-");
-    const name = eventInfo[0];
-    let currentWater = waterGrams;
+    let value = (event.target.type === "number") ?
+      event.target.value :
+      waterGrams;
     let newWater;
-
-    if (name === "cups") {
-      newWater = (eventInfo[1] === "increment") ?
-        currentWater + 280
-        : currentWater - 280;
+    
+    if (eventInfo[0] === "cups") {
+      if (eventInfo[1] === "amount") {
+        newWater = value * 279;
+      }
+      else {
+        newWater = (eventInfo[1] === "decrement" &&
+        waterGrams >= 69.75) ?
+          value - 69.75
+          : value + 69.75;
+      }
     }
-    if (name === "coffeeGrams") {
-      newWater = (eventInfo[1] === "increment") ?
-        currentWater + parseFloat(goldenRatio)
-        : currentWater - parseFloat(goldenRatio);
+    else if (eventInfo[0] === "coffeeGrams") {
+      if (eventInfo[1] === "amount") {
+        newWater = value * parseFloat(goldenRatio);
+      }
+      else {
+        newWater = (eventInfo[1] === "decrement" &&
+          waterGrams >= parseFloat(goldenRatio)) ?
+          value - parseFloat(goldenRatio)
+          : value + parseFloat(goldenRatio);
+      }
     }
-    if (name === "waterGrams") {
-      newWater = (eventInfo[1] === "increment") ?
-        currentWater + 1 
-        : currentWater - 1;
+    else if (eventInfo[0] === "waterGrams") {
+      if (eventInfo[1] === "amount") {
+        newWater = value;
+      }
+      else {
+        newWater = (eventInfo[1] === "decrement" &&
+          waterGrams >= 1) ?
+          value - 1 
+          : value + 1;
+      }
     }
     this.setState({ waterGrams: newWater });
   }
@@ -92,7 +111,7 @@ class App extends Component {
             <IncrementDecrementSet
               name="waterGrams"
               title="Water"
-              value={Math.floor(waterGrams)}
+              value={Math.round(waterGrams)}
               measure="mL or g"
               changeQuantity=
                 {this.updateWater}
