@@ -3,12 +3,8 @@ import { IncrementDecrementSet } from './increment.js';
 import { InputButton } from "./inputButton.js";
 import './App.css';
 
-const DefaultCups = 2;
-// const DefaultBrewAmt = 20;
-const DefaultCoffee = 36;
 const DefaultWater = 560;
 const DefaultRatio = "15.5";
-const waterGramsPerOz = 29.574;
 
 class App extends Component {
   constructor(props) {
@@ -16,112 +12,58 @@ class App extends Component {
 
     this.state = {
       goldenRatio: DefaultRatio,
-      cups: DefaultCups,
-      // brewAmount: DefaultBrewAmt,
-      coffeeGrams: DefaultCoffee,
       waterGrams: DefaultWater, 
       error: null,
     };
 
-    this.updateQuantity = this
-      .updateQuantity.bind(this);
-    this.waterOzToGrams = this.waterOzToGrams.bind(this);
-    this.waterGramsToOz = this.waterGramsToOz.bind(this);
-    // this.updateQuantities = this
-    //   .updateQuantities.bind(this);
+    this.updateWater = this
+      .updateWater.bind(this);
+    this.setGoldenRatio = this.setGoldenRatio.bind(this);
 
   }
 
-  updateAllQuantities(quantity1, quantity2) {
-
-  };
-
-  updateQuantity (event) {
+  updateWater (event) {
+    const { waterGrams, goldenRatio } = this.state;
     const eventInfo = event.target.id.split("-");
     const name = eventInfo[0];
-    const currentQuantity  = this.state[name];
-    let newQuantity;
+    let currentWater = waterGrams;
+    let newWater;
 
-    if (event.target.type === "number") {
-      newQuantity = parseFloat(event.target.value);
+    if (name === "cups") {
+      newWater = (eventInfo[1] === "increment") ?
+        currentWater + 280
+        : currentWater - 280;
     }
-
-    if (event.target.type === "button") {
-      if (eventInfo[1] === "increment" ) {
-        newQuantity = currentQuantity + 1;
-      }
-      if (eventInfo[1] === "decrement" && currentQuantity > 1) {
-        newQuantity = currentQuantity - 1;
-      }
+    if (name === "coffeeGrams") {
+      newWater = (eventInfo[1] === "increment") ?
+        currentWater + parseFloat(goldenRatio)
+        : currentWater - parseFloat(goldenRatio);
     }
-   
-    this.setState({ [name]: newQuantity });
-
-    // if (name === "brewAmount") {
-    //   this.setState({ waterGrams: this.waterOzToGrams(newQuantity )});
-    // }
-    // if (name === "waterGrams") {
-    //   this.setState({ brewAmount: this.waterGramsToOz(newQuantity )});
-    // }
+    if (name === "waterGrams") {
+      newWater = (eventInfo[1] === "increment") ?
+        currentWater + 1 
+        : currentWater - 1;
+    }
+    this.setState({ waterGrams: newWater });
   }
 
-//no longer a submit button
-
-//   onSubmitCoffee(event) {
-//     const { coffeeGrams, goldenRatio } = this.state;
-//     this.setServings(coffeeGrams, parseFloat(goldenRatio));
-//     event.preventDefault();
-//   }
-
-// //no longer a submit button
-//   onSubmitServings(event) {
-//     const { servings, goldenRatio } = this.state;
-//     this.setIngredients(servings, parseFloat(goldenRatio));
-//     event.preventDefault();
-//   }
-
-//this is not being called right now
-  // setServings(coffeeGrams, goldenRatio, servingSize = 280) {
-  //   const possibleServings = (coffeeGrams * goldenRatio) / servingSize;
-  //   const roundedPossibleServings = Math.round(possibleServings * 4) / 4;
-
-  //   this.setIngredients(roundedPossibleServings, goldenRatio);
-  // }
-
-//convert waterGrams to oz
-  waterGramsToOz (waterGrams) {
-    const brewAmountOz = Math.round(waterGrams / waterGramsPerOz);
-    return brewAmountOz;
+  setGoldenRatio (event) {
+    console.log(event);
   }
-
-//convert water in oz to grams
-  waterOzToGrams (waterOz) {
-    const waterGrams = Math.round(waterOz * waterGramsPerOz);
-    console.log(waterGrams);
-    return waterGrams;
-  }
-
-//use the goldenRatio and water amount to calculate cofee needed in grams;
-  coffeeGrams (waterGrams, goldenRatio) {
-    const coffeeGrams = Math.round(waterGrams / goldenRatio);
-    return coffeeGrams;
-  }
-
-// //this is not being called right now
-//   setIngredients(brewAmount, goldenRatio, servingSize=280) {   
-//     const waterGrams = Math.round(brewAmount * servingSize);
-//     const coffeeGrams = Math.round(waterGrams / goldenRatio);
-
-//     this.setState({
-//         brewAmount: brewAmount,
-//         coffeeGrams: coffeeGrams,
-//         waterGrams: waterGrams
-//     });
-//   }
 
   render() {
-    const { cups, coffeeGrams, waterGrams, goldenRatio } = this.state;
+    const { waterGrams, goldenRatio } = this.state;
 
+    const cupsFromWater = (water, cupSize = 280) => {
+      const possibleCups = water / cupSize;
+      const roundedPossibleCups = Math.round(possibleCups * 4) / 4;
+      return roundedPossibleCups;
+    }
+
+    const coffeeGramsFromWater = (water, goldenRatio) => {
+      const coffeeGrams = water / goldenRatio;
+      return Math.round(coffeeGrams);
+    }
     return (
 
       <div className="App">
@@ -133,32 +75,32 @@ class App extends Component {
           <div id="adjustables">
             <IncrementDecrementSet
               name="cups"
-              title="cups"
-              value={cups}
+              title="Brewed Cups"
+              value={cupsFromWater(waterGrams)}
               measure="x 8oz"
-              setQuantity=
-                {this.updateQuantity}
+              changeQuantity=
+                {this.updateWater}
             />
             <IncrementDecrementSet
               name="coffeeGrams"
               title="Ground Coffee"
-              value={coffeeGrams}
+              value={coffeeGramsFromWater(waterGrams, goldenRatio)}
               measure="g"
-              setQuantity=
-                {this.updateQuantity}
+              changeQuantity=
+                {this.updateWater}
             />
             <IncrementDecrementSet
               name="waterGrams"
               title="Water"
-              value={waterGrams}
+              value={Math.floor(waterGrams)}
               measure="mL or g"
-              setQuantity=
-                {this.updateQuantity}
+              changeQuantity=
+                {this.updateWater}
             />
           </div>
 
           <div className="strengthInput interactions">
-            <h2>g Coffee:1g Water</h2>
+            <h2>Coffee : Water</h2>
             <form> 
 
               <div className="strength"> 
@@ -167,7 +109,7 @@ class App extends Component {
                     id="light"
                     name="goldenRatio"
                     value="18"
-                    onClick={this.setQuantity}
+                    onClick={this.setGoldenRatio}
                   />
                 <label className="strength" htmlFor="light">light</label>
               </div>
@@ -178,7 +120,7 @@ class App extends Component {
                   id="med"
                   name="goldenRatio"
                   value="15.5"
-                  onClick={this.setQuantity}
+                  onClick={this.setGoldenRatio}
                 />
                 <label className="strength" htmlFor="med">medium</label>
               </div>
@@ -189,7 +131,7 @@ class App extends Component {
                   id="strong"
                   name="goldenRatio"                
                   value="13"
-                  onClick={this.setQuantity}
+                  onClick={this.setGoldenRatio}
                 />
                 <label className="strength" htmlFor="strong">strong</label>
               </div>
