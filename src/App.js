@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { IncrementDecrementSet } from './increment.js'
 import { InputButton } from './inputButton.js'
+import { TimerDisplay } from './timer.js'
+import { Controls } from './timerControls.js'
 import './App.css'
 
 const DefaultWater = 558
 const DefaultRatio = 15.5
+const DefaultMinutes = 3
+const DefaultSeconds = 30
 
 class App extends Component {
   constructor(props) {
@@ -13,11 +17,31 @@ class App extends Component {
     this.state = {
       goldenRatio: DefaultRatio,
       waterGrams: DefaultWater,
+      timerEnd: 0,
+      minutes: DefaultMinutes,
+      seconds: DefaultSeconds,
+      intervalTime: DefaultMinutes * 60 + DefaultSeconds,
+      timerOn: false,
       error: null,
     }
 
-    this.updateWater = this.updateWater.bind(this)
     this.setGoldenRatio = this.setGoldenRatio.bind(this)
+    this.updateWater = this.updateWater.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
+    this.playPause = this.playPause.bind(this)
+    this.stopTimer = this.stopTimer.bind(this)
+    // this.stepUpTime = this.stepUpTime.bind(this)
+    // this.stepDownTime = this.stepDownTime.bind(this)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.tick)
+  }
+
+  setGoldenRatio(event) {
+    this.setState({
+      goldenRatio: parseFloat(event.target.value),
+    })
   }
 
   updateWater(event) {
@@ -57,14 +81,65 @@ class App extends Component {
     this.setState({ waterGrams: newWater })
   }
 
-  setGoldenRatio(event) {
+  resetTimer() {
+    this.stopTimer()
     this.setState({
-      goldenRatio: parseFloat(event.target.value),
+      minutes: DefaultMinutes,
+      seconds: DefaultSeconds,
+      intervalTime: DefaultMinutes * 60 + DefaultSeconds,
     })
   }
 
+  playPause() {
+    if (this.state.timerOn) this.stopTimer()
+    else this.countdown()
+  }
+
+  stopTimer = () => {
+    this.setState({ timerOn: false })
+    clearTimeout(this.tick)
+  }
+
+  countdown() {
+    const { intervalTime } = this.state
+    let endTime = new Date().getTime() + intervalTime * 1000 + 500
+
+    this.setState({
+      timerOn: true,
+      timerEnd: endTime,
+    })
+
+    const updateClock = () => {
+      let msLeft = endTime - new Date().getTime()
+      // if (msLeft <= 0) {
+      //     // make a ding noise
+      // }
+      if (msLeft >= 0) {
+        let currentTime = new Date(msLeft)
+        this.setState({
+          intervalTime: Math.floor(msLeft / 1000),
+          minutes: currentTime.getUTCMinutes(),
+          seconds: currentTime.getUTCSeconds(),
+        })
+        this.tick = setTimeout(
+          updateClock,
+          currentTime.getUTCMilliseconds() + 500
+        )
+      }
+    }
+    updateClock()
+  }
+
+  // stepUpTime () {
+  //   console.log("up up")
+  // }
+
+  // stepDownTime () {
+  //   console.log("down down")
+  // }
+
   render() {
-    const { waterGrams, goldenRatio } = this.state
+    const { waterGrams, goldenRatio, minutes, seconds } = this.state
 
     const cupsFromWater = (water, cupSize = 280) => {
       const possibleCups = water / cupSize
@@ -76,37 +151,14 @@ class App extends Component {
       const coffeeGrams = water / goldenRatio
       return Math.round(coffeeGrams)
     }
+
+    let twoDigits = time => (time >= 10 ? time : `0${time}`)
+    let countdownView = `${twoDigits(minutes) || '00'}:${twoDigits(seconds) ||
+      '00'}`
+
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>Brew Ratio</h1>
-        </header>
-
         <main>
-          <div id="adjustables">
-            <IncrementDecrementSet
-              name="cups"
-              title="Brewed Cups"
-              value={cupsFromWater(waterGrams)}
-              measure="x 8oz"
-              changeQuantity={this.updateWater}
-            />
-            <IncrementDecrementSet
-              name="coffeeGrams"
-              title="Ground Coffee"
-              value={coffeeGramsFromWater(waterGrams, goldenRatio)}
-              measure="g"
-              changeQuantity={this.updateWater}
-            />
-            <IncrementDecrementSet
-              name="waterGrams"
-              title="Water"
-              value={Math.round(waterGrams)}
-              measure="mL or g"
-              changeQuantity={this.updateWater}
-            />
-          </div>
-
           <div className="strengthInput interactions">
             <h2>Coffee : Water</h2>
             <form>
@@ -150,6 +202,36 @@ class App extends Component {
               </div>
             </form>
           </div>
+
+          <div id="adjustables">
+            <IncrementDecrementSet
+              name="cups"
+              title="Brewed Cups"
+              value={cupsFromWater(waterGrams)}
+              measure="x 8oz"
+              changeQuantity={this.updateWater}
+            />
+            <IncrementDecrementSet
+              name="coffeeGrams"
+              title="Ground Coffee"
+              value={coffeeGramsFromWater(waterGrams, goldenRatio)}
+              measure="g"
+              changeQuantity={this.updateWater}
+            />
+            <IncrementDecrementSet
+              name="waterGrams"
+              title="Water"
+              value={Math.round(waterGrams)}
+              measure="mL or g"
+              changeQuantity={this.updateWater}
+            />
+          </div>
+
+          <TimerDisplay time={countdownView} />
+          <Controls
+            playPauseClick={this.playPause}
+            resetClick={this.resetTimer}
+          />
         </main>
       </div>
     )
