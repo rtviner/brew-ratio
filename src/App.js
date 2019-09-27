@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { IncrementDecrementSet } from './increment.js'
+import { IncrementOrDecrementButton,IncrementDecrementSet } from './increment.js'
 import { InputButton } from './inputButton.js'
 import { TimerDisplay } from './timer.js'
 import { Controls } from './timerControls.js'
@@ -8,7 +8,7 @@ import './App.css'
 const DefaultWater = 558
 const DefaultRatio = 15.5
 const DefaultMinutes = 3
-const DefaultSeconds = 30
+const DefaultSeconds = 0
 
 class App extends Component {
   constructor(props) {
@@ -20,31 +20,33 @@ class App extends Component {
       timerEnd: 0,
       minutes: DefaultMinutes,
       seconds: DefaultSeconds,
-      intervalTime: DefaultMinutes * 60 + DefaultSeconds,
       timerOn: false,
       error: null,
     }
+  }
 
-    this.setGoldenRatio = this.setGoldenRatio.bind(this)
-    this.updateWater = this.updateWater.bind(this)
-    this.resetTimer = this.resetTimer.bind(this)
-    this.playPause = this.playPause.bind(this)
-    this.stopTimer = this.stopTimer.bind(this)
-    // this.stepUpTime = this.stepUpTime.bind(this)
-    // this.stepDownTime = this.stepDownTime.bind(this)
+  componentDidMount() {
+    const goldenRatio = parseFloat(localStorage.getItem('goldenRatio')) || DefaultRatio;
+    const waterGrams = parseFloat(localStorage.getItem('waterGrams'))
+        || DefaultWater;
+    const minutes = parseFloat(localStorage.getItem('minutes'))
+        || DefaultMinutes;
+    const seconds = parseFloat(localStorage.getItem('seconds'))
+        || DefaultSeconds;
+    this.setState({ goldenRatio, waterGrams, minutes, seconds });
   }
 
   componentWillUnmount() {
     clearTimeout(this.tick)
   }
 
-  setGoldenRatio(event) {
+  setGoldenRatio = (event) => {
     this.setState({
       goldenRatio: parseFloat(event.target.value),
     })
   }
 
-  updateWater(event) {
+  updateWater = (event) => {
     const { waterGrams, goldenRatio } = this.state
     const eventInfo = event.target.id.split('-')
     let value = event.target.type === 'number' ? event.target.value : waterGrams
@@ -81,16 +83,15 @@ class App extends Component {
     this.setState({ waterGrams: newWater })
   }
 
-  resetTimer() {
+  resetTimer = () => {
     this.stopTimer()
     this.setState({
       minutes: DefaultMinutes,
       seconds: DefaultSeconds,
-      intervalTime: DefaultMinutes * 60 + DefaultSeconds,
     })
   }
 
-  playPause() {
+  playPause = () => {
     if (this.state.timerOn) this.stopTimer()
     else this.countdown()
   }
@@ -100,8 +101,9 @@ class App extends Component {
     clearTimeout(this.tick)
   }
 
-  countdown() {
-    const { intervalTime } = this.state
+  countdown = () => {
+    const { minutes, seconds } = this.state;
+    let intervalTime = (minutes * 60)  + seconds;
     let endTime = new Date().getTime() + intervalTime * 1000 + 500
 
     this.setState({
@@ -116,8 +118,8 @@ class App extends Component {
       // }
       if (msLeft >= 0) {
         let currentTime = new Date(msLeft)
+        // intervalTime = Math.floor(msLeft / 1000),
         this.setState({
-          intervalTime: Math.floor(msLeft / 1000),
           minutes: currentTime.getUTCMinutes(),
           seconds: currentTime.getUTCSeconds(),
         })
@@ -130,13 +132,53 @@ class App extends Component {
     updateClock()
   }
 
-  // stepUpTime () {
-  //   console.log("up up")
-  // }
+  stepUpTime = () => {
+    const { minutes, seconds } = this.state;
+    const currentMinutes = minutes;
+    const currentSeconds = seconds;
+    let newMinutes;
+    let newSeconds;
+    if (seconds === 59) {
+      newMinutes = currentMinutes + 1;
+      newSeconds = 0;
+      this.setState({ 
+        minutes: newMinutes,
+        seconds: newSeconds
+      });
+    }
+    else if (minutes < 5) {
+      newSeconds = currentSeconds + 1;
+      this.setState({ seconds: newSeconds });
+    }
+  }
 
-  // stepDownTime () {
-  //   console.log("down down")
-  // }
+  stepDownTime = () => {
+    const { minutes, seconds } = this.state;
+    const currentMinutes = minutes;
+    const currentSeconds = seconds;
+    let newMinutes;
+    let newSeconds;
+    if (seconds === 0 && minutes > 2) {
+      newMinutes = currentMinutes - 1;
+      newSeconds = 59;
+      this.setState({ 
+        minutes: newMinutes,
+        seconds: newSeconds 
+      });
+    }
+    if (seconds > 0) {
+      newSeconds = currentSeconds - 1;
+      this.setState({ seconds: newSeconds });
+    }
+  }
+
+  saveSettings = () => {
+    const { goldenRatio, waterGrams, minutes, seconds } = this.state;
+    localStorage.setItem('goldenRatio', goldenRatio);
+    localStorage.setItem('waterGrams', waterGrams);
+    localStorage.setItem('minutes', minutes);
+    localStorage.setItem('seconds', seconds);
+  }
 
   render() {
     const { waterGrams, goldenRatio, minutes, seconds } = this.state
@@ -226,12 +268,33 @@ class App extends Component {
               changeQuantity={this.updateWater}
             />
           </div>
-
-          <TimerDisplay time={countdownView} />
-          <Controls
-            playPauseClick={this.playPause}
-            resetClick={this.resetTimer}
-          />
+          <div id="countdown-timer">
+            <TimerDisplay time={countdownView} />
+            <div className="increment timer">
+              <IncrementOrDecrementButton 
+                id="timer"
+                onClick={this.stepUpTime}
+                text="+"
+              />
+              <IncrementOrDecrementButton 
+                id="timer"
+                onClick={this.stepDownTime}
+                text="-"
+              />
+            </div>
+            <Controls
+              playPauseClick={this.playPause}
+              resetClick={this.resetTimer}
+            />
+          </div>
+          <button
+            id="saveSettings"
+            className="rectButton"
+            type="button"
+            onClick={this.saveSettings}
+          >
+            Save Settings
+          </button>
         </main>
       </div>
     )
