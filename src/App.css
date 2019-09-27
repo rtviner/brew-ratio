@@ -195,11 +195,18 @@ span.button:focus {
 	box-shadow: none;
 }
 
+div#countdown-timer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
 div#timer-display {
+		width: 90%;
     max-width: 200px;
-    margin: 0 auto;
-    margin-bottom: .25em;
-    font-size: 2rem;
+    margin: .25em;
     border: 1px #cfd11a solid;
     border-radius: 35px;
     background-color: #424242;
@@ -208,6 +215,23 @@ div#timer-display {
 h3#time-left {
     margin: .5em auto;
     font-weight: normal;
+    font-size: 2rem;
+}
+
+div.increment.timer {
+	padding-right: 0;
+}
+
+div.controls {
+	width: 100%;
+}
+
+button#saveSettings {
+    font-size: 1.25rem;
+    max-width: 8em;
+    margin: 0 auto;
+    background-color: #0D00A4;
+    border-radius: 5px;
 }
 
 @media screen and (min-width: 720px) {
