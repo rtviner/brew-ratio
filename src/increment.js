@@ -54,4 +54,4 @@ IncrementDecrementSet.propTypes = {
     setQuantity: PropTypes.func
 };
 
-export { IncrementDecrementSet  };
+export { IncrementOrDecrementButton, IncrementDecrementSet  };
