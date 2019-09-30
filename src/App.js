@@ -9,6 +9,9 @@ const DefaultWater = 558
 const DefaultRatio = 15.5
 const DefaultMinutes = 3
 const DefaultSeconds = 0
+const light = 18
+const med = 15.5
+const strong = 13
 
 class App extends Component {
   constructor(props) {
@@ -41,8 +44,9 @@ class App extends Component {
   }
 
   setGoldenRatio = (event) => {
+    let ratio = event.target.value.split(":");
     this.setState({
-      goldenRatio: parseFloat(event.target.value),
+      goldenRatio: parseFloat(ratio[1]),
     })
   }
 
@@ -209,7 +213,7 @@ class App extends Component {
                   className={goldenRatio === 18 ? 'active' : 'inactive'}
                   id="light"
                   name="goldenRatio"
-                  value="18"
+                  value={`1:${light}`}
                   onClick={this.setGoldenRatio}
                 />
                 <label className="strength" htmlFor="light">
@@ -222,7 +226,7 @@ class App extends Component {
                   className={goldenRatio === 15.5 ? 'active' : 'inactive'}
                   id="med"
                   name="goldenRatio"
-                  value="15.5"
+                  value={`1:${med}`}
                   onClick={this.setGoldenRatio}
                 />
                 <label className="strength" htmlFor="med">
@@ -235,7 +239,7 @@ class App extends Component {
                   className={goldenRatio === 13 ? 'active' : 'inactive'}
                   id="strong"
                   name="goldenRatio"
-                  value="13"
+                  value={`1:${strong}`}
                   onClick={this.setGoldenRatio}
                 />
                 <label className="strength" htmlFor="strong">
