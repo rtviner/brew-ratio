@@ -269,11 +269,6 @@ class App extends Component {
             />
           </div>
           <div id="countdown-timer">
-            <Controls
-              playPauseClick={this.playPause}
-              resetClick={this.resetTimer}
-            />
-            <TimerDisplay time={countdownView} />
             <div className="increment timer">
               <IncrementOrDecrementButton 
                 id="timer"
@@ -286,6 +281,11 @@ class App extends Component {
                 text="-"
               />
             </div>
+            <TimerDisplay time={countdownView} />
+            <Controls
+              playPauseClick={this.playPause}
+              resetClick={this.resetTimer}
+            />
           </div>
           <button
             id="saveSettings"
