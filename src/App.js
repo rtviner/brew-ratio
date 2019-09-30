@@ -201,9 +201,9 @@ class App extends Component {
     return (
       <div className="App">
         <main>
-          <div className="strengthInput interactions">
-            <h2>Coffee : Water</h2>
-            <form>
+          <div className="adjustables">
+            <h2 className="inputLabel">Coffee : Water</h2>
+            <form className="interactions">
               <div className="strength">
                 <InputButton
                   className={goldenRatio === 18 ? 'active' : 'inactive'}
@@ -245,7 +245,7 @@ class App extends Component {
             </form>
           </div>
 
-          <div id="adjustables">
+          <div className="adjustables">
             <IncrementDecrementSet
               name="cups"
               title="Brewed Cups"
@@ -269,6 +269,10 @@ class App extends Component {
             />
           </div>
           <div id="countdown-timer">
+            <Controls
+              playPauseClick={this.playPause}
+              resetClick={this.resetTimer}
+            />
             <TimerDisplay time={countdownView} />
             <div className="increment timer">
               <IncrementOrDecrementButton 
@@ -282,10 +286,6 @@ class App extends Component {
                 text="-"
               />
             </div>
-            <Controls
-              playPauseClick={this.playPause}
-              resetClick={this.resetTimer}
-            />
           </div>
           <button
             id="saveSettings"
