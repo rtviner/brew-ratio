@@ -250,7 +250,7 @@ class App extends Component {
               name="cups"
               title="Brewed Cups"
               value={cupsFromWater(waterGrams)}
-              measure="x 8oz"
+              measure="8oz"
               changeQuantity={this.updateWater}
             />
             <IncrementDecrementSet
@@ -264,7 +264,7 @@ class App extends Component {
               name="waterGrams"
               title="Water"
               value={Math.round(waterGrams)}
-              measure="mL or g"
+              measure="g/mL"
               changeQuantity={this.updateWater}
             />
           </div>

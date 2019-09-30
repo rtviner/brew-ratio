@@ -72,6 +72,10 @@ input[type='number']::-webkit-outer-spin-button {
 	margin: 0;
 }
 
+h2.title {
+	min-height: 2.25em;
+}
+
 p.measure {
 	display: inline-block;
 	font-size: 1.2rem;
@@ -136,6 +140,7 @@ button {
 	padding: 0.5rem;
 	margin: 0.75rem;
 	border-radius: 5px;
+	touch-action: manipulation;
 }
 
 button.incrementDecrement {
@@ -145,6 +150,12 @@ button.incrementDecrement {
 	padding: 0;
 	transition-property: box-shadow;
 	transition-duration: 1s;
+}
+
+button#cups-increment, button#cups-decrement, button#coffeeGrams-increment, button#coffeeGrams-decrement, button#waterGrams-increment, button#waterGrams-decrement {
+    width: auto;
+    height: 2rem;
+    line-height: 2rem;
 }
 
 button#start_stop,
@@ -220,20 +231,12 @@ button#saveSettings {
     border-radius: 5px;
 }
 
-@media screen and (max-width: 610px) {
-
-}
-
-@media screen and (min-width: 720px) {
-/*	main {
-		max-width: 80%;
+@media screen and (min-width: 440px) {
+	h2.title {
+		min-height: 0;
 	}
-*/
+
 	button {
 		width: 12em;
 	}
-/*	div.strengthInput {
-		width: 80%;
-		margin: 0 auto;
-	}*/
 }

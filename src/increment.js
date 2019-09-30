@@ -20,21 +20,21 @@ IncrementOrDecrementButton.propTypes = {
 
 const IncrementDecrementSet = ({ name, title, value, measure, changeQuantity }) => (
     <div className="incrementDecrement" id={`${name}-label`}>
-        <h2>{title}</h2>
+        <h2 className="title">{title}</h2>
+        <p className="measure">{measure}</p>
         <div className="interactions">
-            <input 
-                type="number" 
-                min="0"
-                value={value}
-                id={`${name}-amount`}
-                onChange={changeQuantity}
-            />
-            <p className="measure">{measure}</p>
             <div className="increment">
                 <IncrementOrDecrementButton
                     id={`${name}-increment`}
                     text="+"
                     onClick={changeQuantity}
+                />
+                <input 
+                    type="number" 
+                    min="0"
+                    value={value}
+                    id={`${name}-amount`}
+                    onChange={changeQuantity}
                 />
                 <IncrementOrDecrementButton
                     id={`${name}-decrement`}
