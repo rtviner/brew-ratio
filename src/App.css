@@ -23,6 +23,41 @@ h2 {
 	margin-bottom: 0.5rem;
 }
 
+.adjustables {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0.5em;
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.interactions {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-evenly;
+	align-content: center;
+	width: 100%;
+	margin: 0 auto;
+}
+
+h2.inputLabel {
+	width: 100%;
+}
+
+div.strength label {
+	display: block;
+}
+
+input#light,
+input#med,
+input#strong {
+	border-radius: 50%;
+	height: 5rem;
+	width: 5rem;
+	padding: 0;
+	font-size: 1.25rem;
+}
+
 input[type='number'] {
 	max-width: 3.65rem;
 	text-align: center;
@@ -45,32 +80,15 @@ p.measure {
 	padding: 0.25rem;
 }
 
-div#adjustables {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	padding: 0.5em;
-}
-
 div.incrementDecrement {
 	padding: 1em 0;
-	width: 50%;
-}
-
-div.interactions {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: center;
-	width: 100%;
-	margin: 0 auto;
+	width: 33.3%;
 }
 
 div.increment {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding-right: 2em;
 }
 
 input {
@@ -108,11 +126,6 @@ input:focus {
 	box-shadow: none;
 }
 
-form {
-	display: flex;
-	flex-direction: row;
-}
-
 button {
 	width: 90%;
 	max-width: 5em;
@@ -136,9 +149,11 @@ button.incrementDecrement {
 
 button#start_stop,
 button#reset {
-	border-radius: 50%;
-	height: 5rem;
-	width: 5rem;
+	width: 3rem;
+  height: 3rem;
+  margin: 0.12em;
+  padding: 0;
+  font-size: 1em;
 }
 
 button:hover {
@@ -162,34 +177,6 @@ button:focus {
 	box-shadow: none;
 }
 
-div.strengthInput {
-	display: flex;
-	flex-direction: column;
-	align-content: space-between;
-}
-
-div.strengthInput h2 {
-	width: 100%;
-}
-
-div.strength {
-	width: 33%;
-}
-
-div.strength label {
-	display: block;
-}
-
-input#light,
-input#med,
-input#strong {
-	border-radius: 50%;
-	height: 5rem;
-	width: 5rem;
-	padding: 0;
-	font-size: 1.25rem;
-}
-
 span.button:focus {
 	outline-style: none;
 	box-shadow: none;
@@ -204,11 +191,9 @@ div#countdown-timer {
 }
 
 div#timer-display {
-		width: 90%;
-    max-width: 200px;
+    width: auto;
+    min-width: 120px;
     margin: .25em;
-    border: 1px #cfd11a solid;
-    border-radius: 35px;
     background-color: #424242;
 }
 
@@ -223,27 +208,32 @@ div.increment.timer {
 }
 
 div.controls {
-	width: 100%;
+	display: flex;
+	flex-direction: column
 }
 
 button#saveSettings {
     font-size: 1.25rem;
     max-width: 8em;
-    margin: 0 auto;
+    margin: 1.5em auto;
     background-color: #0D00A4;
     border-radius: 5px;
 }
 
-@media screen and (min-width: 720px) {
-	main {
-		max-width: 60%;
-	}
+@media screen and (max-width: 610px) {
 
+}
+
+@media screen and (min-width: 720px) {
+/*	main {
+		max-width: 80%;
+	}
+*/
 	button {
 		width: 12em;
 	}
-	div.strengthInput {
+/*	div.strengthInput {
 		width: 80%;
 		margin: 0 auto;
-	}
+	}*/
 }
