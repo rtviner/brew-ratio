@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { IncrementOrDecrementButton,IncrementDecrementSet } from './increment.js'
-import { InputButton } from './inputButton.js'
-import { TimerDisplay } from './timer.js'
-import { Controls } from './timerControls.js'
-import './App.css'
+
+import './App.css';
+
+import QuantityInput from './components/QuantityInput';
+import StrengthInput from './components/StrengthInput';
+import Timer from './components/Timer';
 
 const DefaultWater = 558
 const DefaultRatio = 15.5
@@ -185,112 +186,29 @@ class App extends Component {
   }
 
   render() {
-    const { waterGrams, goldenRatio, minutes, seconds } = this.state
-
-    const cupsFromWater = (water, cupSize = 280) => {
-      const possibleCups = water / cupSize
-      const roundedPossibleCups = Math.round(possibleCups * 4) / 4
-      return roundedPossibleCups
-    }
-
-    const coffeeGramsFromWater = (water, goldenRatio) => {
-      const coffeeGrams = water / goldenRatio
-      return Math.round(coffeeGrams)
-    }
-
-    let twoDigits = time => (time >= 10 ? time : `0${time}`)
-    let countdownView = `${twoDigits(minutes) || '00'}:${twoDigits(seconds) ||
-      '00'}`
+    const { waterGrams, goldenRatio } = this.state
 
     return (
       <div className="App">
         <main>
-          <div className="adjustables">
-            <h2 className="inputLabel">Coffee : Water</h2>
-            <form className="interactions">
-              <div className="strength">
-                <InputButton
-                  className={goldenRatio === 18 ? 'active' : 'inactive'}
-                  id="light"
-                  name="goldenRatio"
-                  value={`1:${light}`}
-                  onClick={this.setGoldenRatio}
-                />
-                <label className="strength" htmlFor="light">
-                  light
-                </label>
-              </div>
-
-              <div className="strength">
-                <InputButton
-                  className={goldenRatio === 15.5 ? 'active' : 'inactive'}
-                  id="med"
-                  name="goldenRatio"
-                  value={`1:${med}`}
-                  onClick={this.setGoldenRatio}
-                />
-                <label className="strength" htmlFor="med">
-                  medium
-                </label>
-              </div>
-
-              <div className="strength">
-                <InputButton
-                  className={goldenRatio === 13 ? 'active' : 'inactive'}
-                  id="strong"
-                  name="goldenRatio"
-                  value={`1:${strong}`}
-                  onClick={this.setGoldenRatio}
-                />
-                <label className="strength" htmlFor="strong">
-                  strong
-                </label>
-              </div>
-            </form>
-          </div>
-
-          <div className="adjustables">
-            <IncrementDecrementSet
-              name="cups"
-              title="Brewed Cups"
-              value={cupsFromWater(waterGrams)}
-              measure="8oz"
-              changeQuantity={this.updateWater}
-            />
-            <IncrementDecrementSet
-              name="coffeeGrams"
-              title="Ground Coffee"
-              value={coffeeGramsFromWater(waterGrams, goldenRatio)}
-              measure="g"
-              changeQuantity={this.updateWater}
-            />
-            <IncrementDecrementSet
-              name="waterGrams"
-              title="Water"
-              value={Math.round(waterGrams)}
-              measure="g/mL"
-              changeQuantity={this.updateWater}
-            />
-          </div>
-          <div id="countdown-timer">
-            <div className="increment timer">
-              <IncrementOrDecrementButton 
-                id="timer"
-                onClick={this.stepUpTime}
-                text="+"
-              />
-              <IncrementOrDecrementButton 
-                id="timer"
-                onClick={this.stepDownTime}
-                text="-"
-              />
-            </div>
-            <TimerDisplay time={countdownView} />
-            <Controls
-              playPauseClick={this.playPause}
-              resetClick={this.resetTimer}
-            />
-          </div>
+          <StrengthInput 
+            goldenRatio = {goldenRatio}
+            light = {light}
+            med = {med}
+            strong = {strong}
+            setGoldenRatio = {this.setGoldenRatio}
+          />
+          <QuantityInput 
+            waterGrams = {waterGrams}
+            goldenRatio = {goldenRatio}
+            updateWater = {this.updateWater}
+          />
+          <Timer 
+            stepUpTime = {this.stepUpTime}
+            stepDownTime = {this.stepDownTime}
+            playPause = {this.playPause}
+            resetTimer = {this.resetTimer}
+          />
           <button
             id="saveSettings"
             className="rectButton"
