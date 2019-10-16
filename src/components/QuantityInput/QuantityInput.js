@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import IncrementDecrementQuantity from '../IncrementDecrementQuantity'
+import IncrementDecrementQuantity from './IncrementDecrementQuantity'
 
 const cupsFromWater = (water, cupSize = 280) => {
   const possibleCups = water / cupSize

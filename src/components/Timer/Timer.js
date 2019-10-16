@@ -1,18 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Controls from '../Controls';
+import Controls from './Controls';
+import TimerDisplay from './TimerDisplay';
 import IncrementDecrementButton from '../shared/IncrementDecrementButton';
-import TimerDisplay from '../TimerDisplay';
-
-let minutes = 2;
-let seconds = 30;
 
 let twoDigits = time => (time >= 10 ? time : `0${time}`);
 
-let countdownView = `${twoDigits(minutes) || '00'}:${twoDigits(seconds) || '00'}`;
+const countdownView = (minutes, seconds) => `${twoDigits(minutes) || '00'}:${twoDigits(seconds) || '00'}`;
 
-const Timer = ({ stepUpTime, stepDownTime, playPause, resetTimer  }) => (
+const Timer = ({ stepUpTime, stepDownTime, minutes, seconds, playPause, resetTimer  }) => (
+
     <div id="countdown-timer">
       <div className="increment timer">
         <IncrementDecrementButton 
@@ -26,7 +24,7 @@ const Timer = ({ stepUpTime, stepDownTime, playPause, resetTimer  }) => (
           text="-"
         />
       </div>
-      <TimerDisplay time={countdownView} />
+      <TimerDisplay time={countdownView(minutes, seconds)} />
       <Controls
         playPauseClick={playPause}
         resetClick={resetTimer}

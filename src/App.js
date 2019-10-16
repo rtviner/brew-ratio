@@ -10,9 +10,6 @@ const DefaultWater = 558
 const DefaultRatio = 15.5
 const DefaultMinutes = 3
 const DefaultSeconds = 0
-const light = 18
-const med = 15.5
-const strong = 13
 
 class App extends Component {
   constructor(props) {
@@ -186,16 +183,13 @@ class App extends Component {
   }
 
   render() {
-    const { waterGrams, goldenRatio } = this.state
+    const { goldenRatio, waterGrams, minutes, seconds } = this.state
 
     return (
       <div className="App">
         <main>
           <StrengthInput 
             goldenRatio = {goldenRatio}
-            light = {light}
-            med = {med}
-            strong = {strong}
             setGoldenRatio = {this.setGoldenRatio}
           />
           <QuantityInput 
@@ -204,6 +198,8 @@ class App extends Component {
             updateWater = {this.updateWater}
           />
           <Timer 
+            minutes = {minutes}
+            seconds = {seconds}
             stepUpTime = {this.stepUpTime}
             stepDownTime = {this.stepDownTime}
             playPause = {this.playPause}

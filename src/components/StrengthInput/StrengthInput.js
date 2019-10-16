@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import InputButton from '../InputButton';
+import InputButton from '../shared/InputButton';
 
-const StrengthInput = ({ goldenRatio, light, med, strong, setGoldenRatio }) => (
+const light = 18
+const med = 15.5
+const strong = 13
+
+const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 		<div className="adjustables">
 		  <h2 className="inputLabel">Coffee : Water</h2>
 		  <form className="interactions">
