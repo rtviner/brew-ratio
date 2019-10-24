@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import '@fortawesome/fontawesome-free/js/solid';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Controls = ({ playPauseClick, resetClick }) => (
     <div className="controls">

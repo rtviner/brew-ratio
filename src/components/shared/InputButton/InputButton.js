@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const InputButton = ({ className, id, name, value, onClick }) => (
   <span className="button">
