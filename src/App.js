@@ -24,17 +24,16 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const method = localStorage.getItem('method') || DefaultMethod;
     const goldenRatio = parseFloat(localStorage.getItem('goldenRatio')) || DefaultRatio;
     const waterGrams = parseFloat(localStorage.getItem('waterGrams'))
         || DefaultWater;
 
-    this.setState({ goldenRatio, waterGrams });
+    this.setState({ method, goldenRatio, waterGrams });
   }
   setMethod = (event) => {
     let method = event.target.value;
-    this.setState({
-      method: method
-    })
+    this.setState({ method })
   }
 
   setGoldenRatio = (event) => {
@@ -82,10 +81,10 @@ class App extends Component {
   }
 
   saveSettings = () => {
-    const { goldenRatio, waterGrams } = this.state;
+    const { method, goldenRatio, waterGrams } = this.state;
+    localStorage.setItem('method', method);
     localStorage.setItem('goldenRatio', goldenRatio);
     localStorage.setItem('waterGrams', waterGrams);
-  
   }
 
   render() {
