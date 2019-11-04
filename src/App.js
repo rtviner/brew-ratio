@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 
 import './App.css';
 
+import BrewMethodInput from './components/BrewMethodInput'
 import QuantityInput from './components/QuantityInput';
 import StrengthInput from './components/StrengthInput';
 import Timer from './components/Timer';
 
+const DefaultMethod = "Pour Over"
 const DefaultWater = 558
 const DefaultRatio = 15.5
 
@@ -14,6 +16,7 @@ class App extends Component {
     super(props)
 
     this.state = {
+      method: DefaultMethod,
       goldenRatio: DefaultRatio,
       waterGrams: DefaultWater,
       error: null,
@@ -26,6 +29,12 @@ class App extends Component {
         || DefaultWater;
 
     this.setState({ goldenRatio, waterGrams });
+  }
+  setMethod = (event) => {
+    let method = event.target.value;
+    this.setState({
+      method: method
+    })
   }
 
   setGoldenRatio = (event) => {
@@ -80,11 +89,15 @@ class App extends Component {
   }
 
   render() {
-    const { goldenRatio, waterGrams } = this.state
+    const { method, goldenRatio, waterGrams } = this.state
 
     return (
       <div className="App">
         <main>
+          <BrewMethodInput
+            method = {method}
+            setMethod = {this.setMethod}
+          />
           <StrengthInput 
             goldenRatio = {goldenRatio}
             setGoldenRatio = {this.setGoldenRatio}
