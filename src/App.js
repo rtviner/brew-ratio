@@ -37,9 +37,9 @@ class App extends Component {
   }
 
   setGoldenRatio = (event) => {
-    let ratio = event.target.value.split(":");
+    let ratio = event.target.value;
     this.setState({
-      goldenRatio: parseFloat(ratio[1]),
+      goldenRatio: parseFloat(ratio),
     })
   }
 
