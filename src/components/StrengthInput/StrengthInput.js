@@ -9,14 +9,14 @@ const strong = 13
 
 const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 		<div className="adjustables">
-		  <h2 className="inputLabel">Coffee : Water</h2>
+		  <h2 className="inputLabel">1g Coffee : Xg Water</h2>
 		  <form className="interactions">
 		    <div className="strength">
 		      <InputButton
 		        className={goldenRatio === 18 ? 'active' : 'inactive'}
 		        id="light"
 		        name="goldenRatio"
-		        value={`1:${light}`}
+		        value={light}
 		        onClick={setGoldenRatio}
 		      />
 		      <label className="strength" htmlFor="light">
@@ -29,7 +29,7 @@ const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 		        className={goldenRatio === 15.5 ? 'active' : 'inactive'}
 		        id="med"
 		        name="goldenRatio"
-		        value={`1:${med}`}
+		        value={med}
 		        onClick={setGoldenRatio}
 		      />
 		      <label className="strength" htmlFor="med">
@@ -42,7 +42,7 @@ const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 		        className={goldenRatio === 13 ? 'active' : 'inactive'}
 		        id="strong"
 		        name="goldenRatio"
-		        value={`1:${strong}`}
+		        value={strong}
 		        onClick={setGoldenRatio}
 		      />
 		      <label className="strength" htmlFor="strong">
