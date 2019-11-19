@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 
@@ -10,41 +10,92 @@ import Timer from './components/Timer';
 const DefaultMethod = "Pour Over"
 const DefaultWater = 558
 const DefaultRatio = 15.5
+const DefaultSeconds = 180;
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      method: DefaultMethod,
-      goldenRatio: DefaultRatio,
-      waterGrams: DefaultWater,
-      error: null,
-    }
-  }
-
-  componentDidMount() {
+const App = () => {
+  const [method, setMethod] = useState(DefaultMethod);
+  const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
+  const [waterGrams, setWaterGrams] = useState(DefaultWater);
+  const [seconds, setSeconds] = useState(DefaultSeconds);
+  const [timerOn, setTimerOn] = useState(false);
+  
+  useEffect(() => {
     const method = localStorage.getItem('method') || DefaultMethod;
     const goldenRatio = parseFloat(localStorage.getItem('goldenRatio')) || DefaultRatio;
     const waterGrams = parseFloat(localStorage.getItem('waterGrams'))
         || DefaultWater;
+    const seconds = parseFloat(localStorage.getItem('seconds'))
+        || DefaultSeconds;
 
-    this.setState({ method, goldenRatio, waterGrams });
-  }
-  setMethod = (event) => {
+    setMethod(method);
+    setGoldenRatio(goldenRatio);
+    setWaterGrams(waterGrams);
+    setSeconds(seconds);
+  }, []);
+
+  useEffect(() => {
+    var tick = null;
+    
+    if (timerOn && seconds > 0) {
+      let endTime = new Date().getTime() +seconds * 1000 + 500;
+
+      const updateClock = () => {
+        let msLeft = endTime - new Date().getTime();
+
+        if (msLeft >= 0) {
+          setSeconds(Math.floor(msLeft/1000));
+
+          tick = setTimeout(
+            updateClock,
+            new Date(msLeft).getUTCMilliseconds() + 500
+          );
+        }
+      }
+      updateClock()
+    } else if (!timerOn) {
+      clearInterval(tick);
+    }
+    return () => clearInterval(tick);
+  }, [timerOn, seconds]);
+
+  const stepUpTime = () => {
+    const currentSeconds = seconds;
+
+    if (!timerOn && currentSeconds < 420) {
+      let newSeconds = currentSeconds + 1;
+      setSeconds(newSeconds);
+    }
+  };
+
+  const stepDownTime = () => {
+    const currentSeconds = seconds;
+
+    if (!timerOn && seconds > 0) {
+      let newSeconds = currentSeconds - 1;
+      setSeconds(newSeconds);
+    }
+  };
+
+  const resetTimer = () => {
+    setSeconds(DefaultSeconds);
+    setTimerOn(false);
+  };
+
+  const playPause = () => {
+    setTimerOn(!timerOn);
+  };
+
+  const changeMethod = (event) => {
     let method = event.target.value;
-    this.setState({ method })
-  }
+    setMethod(method);
+  };
 
-  setGoldenRatio = (event) => {
+  const updateGoldenRatio = (event) => {
     let ratio = event.target.value;
-    this.setState({
-      goldenRatio: parseFloat(ratio),
-    })
-  }
+    setGoldenRatio(parseFloat(ratio));
+  };
 
-  updateWater = (event) => {
-    const { waterGrams, goldenRatio } = this.state
+  const updateWater = (event) => {
     const eventInfo = event.target.id.split('-')
     let value = event.target.type === 'number' ? event.target.value : waterGrams
     let newWater
@@ -77,48 +128,52 @@ class App extends Component {
             : value + 1
       }
     }
-    this.setState({ waterGrams: newWater })
-  }
+    setWaterGrams(newWater);
+  };
 
-  saveSettings = () => {
-    const { method, goldenRatio, waterGrams } = this.state;
+  const saveSettings = () => {
     localStorage.setItem('method', method);
-    localStorage.setItem('goldenRatio', goldenRatio);
-    localStorage.setItem('waterGrams', waterGrams);
-  }
+    localStorage.setItem('goldenRatio', 
+      goldenRatio);
+    localStorage.setItem('waterGrams', 
+      waterGrams);
+    localStorage.setItem('seconds', seconds)
+  };
 
-  render() {
-    const { method, goldenRatio, waterGrams } = this.state
-
-    return (
-      <div className="App">
-        <main>
-          <BrewMethodInput
-            method = {method}
-            setMethod = {this.setMethod}
-          />
-          <StrengthInput 
-            goldenRatio = {goldenRatio}
-            setGoldenRatio = {this.setGoldenRatio}
-          />
-          <QuantityInput 
-            waterGrams = {waterGrams}
-            goldenRatio = {goldenRatio}
-            updateWater = {this.updateWater}
-          />
-          <Timer />
-          <button
-            id="saveSettings"
-            className="rectButton"
-            type="button"
-            onClick={this.saveSettings}
-          >
-            Save Settings
-          </button>
-        </main>
-      </div>
-    )
-  }
-}
+  return (
+    <div className="App">
+      <main>
+        <BrewMethodInput
+          method = {method}
+          changeMethod = {changeMethod}
+        />
+        <StrengthInput 
+          goldenRatio = {goldenRatio}
+          setGoldenRatio = {updateGoldenRatio}
+        />
+        <QuantityInput 
+          waterGrams = {waterGrams}
+          goldenRatio = {goldenRatio}
+          updateWater = {updateWater}
+        />
+        <Timer 
+          seconds = {seconds}
+          stepUpTime = {stepUpTime}
+          stepDownTime = {stepDownTime}
+          resetTimer = {resetTimer}
+          playPause = {playPause}
+        />
+        <button
+          id="saveSettings"
+          className="rectButton"
+          type="button"
+          onClick={saveSettings}
+        >
+          Save Settings
+        </button>
+      </main>
+    </div>
+  );
+};
 
 export default App
