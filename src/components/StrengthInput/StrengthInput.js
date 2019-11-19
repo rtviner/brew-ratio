@@ -3,9 +3,9 @@ import React from 'react';
 
 import InputButton from '../shared/InputButton';
 
-const light = 18
-const med = 15.5
-const strong = 13
+const light = "18"
+const med = "15.5"
+const strong = "13"
 
 const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 		<div className="adjustables">
@@ -55,9 +55,9 @@ const StrengthInput = ({ goldenRatio, setGoldenRatio }) => (
 
 StrengthInput.propTypes = {
     goldenRatio: PropTypes.number,
-    light: PropTypes.number,
-    med: PropTypes.number,
-    strong: PropTypes.number,
+    light: PropTypes.string,
+    med: PropTypes.string,
+    strong: PropTypes.string,
     setGoldenRatio: PropTypes.func
 };
 

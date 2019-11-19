@@ -3,7 +3,7 @@ import React from 'react';
 
 import InputButton from '../shared/InputButton';
 
-const BrewMethodInput = ({ method, setMethod }) => (
+const BrewMethodInput = ({ method, changeMethod }) => (
 		<div className="adjustables">
 		  <h2 className="inputLabel">Brew Method</h2>
 		  <form className="interactions">
@@ -13,7 +13,7 @@ const BrewMethodInput = ({ method, setMethod }) => (
 		        id="aeroPress"
 		        name="method"
 		        value="AeroPress"
-		        onClick={setMethod}
+		        onClick={changeMethod}
 		      />
 		    </div>
 
@@ -23,7 +23,7 @@ const BrewMethodInput = ({ method, setMethod }) => (
 		        id="frenchPress"
 		        name="method"
 		        value="French Press"
-		        onClick={setMethod}
+		        onClick={changeMethod}
 		      />
 		    </div>
 
@@ -33,7 +33,7 @@ const BrewMethodInput = ({ method, setMethod }) => (
 		        id="pourOver"
 		        name="method"
 		        value="Pour Over"
-		        onClick={setMethod}
+		        onClick={changeMethod}
 		      />
 		    </div>
 		  </form>
@@ -42,7 +42,7 @@ const BrewMethodInput = ({ method, setMethod }) => (
 
 BrewMethodInput.propTypes = {
     method: PropTypes.string,
-    setMethod: PropTypes.func
+    changeMethod: PropTypes.func
 };
 
 export default BrewMethodInput;
