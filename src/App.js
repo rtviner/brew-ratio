@@ -13,6 +13,16 @@ const DefaultRatio = 15.5
 const DefaultSeconds = 180;
 const cupSize = 279;
 
+const stepDownValue = (value, factor) => {
+  if (value > factor) {
+    return value - factor;
+  } 
+};  
+
+const stepUpValue = (value, factor) => {
+  return value + factor;
+};
+
 const App = () => {
   const [method, setMethod] = useState(DefaultMethod);
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
@@ -59,34 +69,19 @@ const App = () => {
     return () => clearInterval(tick);
   }, [timerOn, seconds]);
 
-  const stepUpTime = () => {
-    const currentSeconds = seconds;
-
-    if (!timerOn && currentSeconds < 420) {
-      let newSeconds = currentSeconds + 1;
-      setSeconds(newSeconds);
-    }
-  };
-
   const stepDownTime = () => {
-    const currentSeconds = seconds;
-
-    if (!timerOn && currentSeconds > 0) {
-      let newSeconds = currentSeconds - 1;
+    if (!timerOn && seconds > 0) {
+      let newSeconds = stepDownValue(seconds,1);
       setSeconds(newSeconds);
     }
   };
 
-  const stepDownValue = (value, conversionFactor) => {
-    if (value > conversionFactor) {
-      return value - conversionFactor;
-    } 
-  }
-  
-
-  const stepUpValue = (value, conversionFactor) => {
-    return value + conversionFactor;
-  }
+  const stepUpTime = () => {
+    if (!timerOn && seconds < 420) {
+      let newSeconds = stepUpValue(seconds, 1);
+      setSeconds(newSeconds);
+    }
+  };
 
   const resetTimer = () => {
     setSeconds(DefaultSeconds);
@@ -107,12 +102,13 @@ const App = () => {
     setGoldenRatio(parseFloat(ratio));
   };
 
+  const conversionFactors = {
+    cups: cupSize,
+    coffeeGrams: goldenRatio,
+    waterGrams: 1
+  };
+
   const updateWater = (event) => {
-    const conversionFactors = {
-      cups: cupSize,
-      coffeeGrams: goldenRatio,
-      waterGrams: 1
-    };
     const eventInfo = event.target.id.split('-');
     let conversionFactor = conversionFactors[eventInfo[0]];
     let incrementFactor = (eventInfo[0] === 'cups') ? conversionFactor/4 : conversionFactor;
