@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
 import './App.css';
-import {DefaultWater, DefaultRatio, DefaultSeconds, cupSize} from './defaultValues.js'
+import {DefaultMethod, DefaultWater, DefaultRatio, DefaultSeconds, cupSize} from './defaultValues.js'
 import {stepDownValue, stepUpValue} from './stepValue.js'
 
+import BrewMethodInput from './components/BrewMethodInput'
 import QuantityInput from './components/QuantityInput';
 import StrengthInput from './components/StrengthInput';
 import Timer from './components/Timer';
 
 const App = () => {
+  const [method, setMethod] = useState(DefaultMethod);
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
   const [waterGrams, setWaterGrams] = useState(DefaultWater);
   const [seconds, setSeconds] = useState(DefaultSeconds);
   const [timerOn, setTimerOn] = useState(false);
   
   useEffect(() => {
+    const method = localStorage.getItem('method') || DefaultMethod;
     const goldenRatio = parseFloat(localStorage.getItem('goldenRatio')) || DefaultRatio;
     const waterGrams = parseFloat(localStorage.getItem('waterGrams'))
         || DefaultWater;
     const seconds = parseFloat(localStorage.getItem('seconds'))
         || DefaultSeconds;
 
+    setMethod(method);
     setGoldenRatio(goldenRatio);
     setWaterGrams(waterGrams);
     setSeconds(seconds);
@@ -98,7 +102,13 @@ const App = () => {
     setWaterGrams(newWater);
   };
 
+  const changeMethod = (event) => {
+    let method = event.target.value;
+    setMethod(method);
+  };
+
   const saveSettings = () => {
+    localStorage.setItem('method', method);
     localStorage.setItem('goldenRatio', 
       goldenRatio);
     localStorage.setItem('waterGrams', 
@@ -109,6 +119,10 @@ const App = () => {
   return (
     <div className="App">
       <main>
+        <BrewMethodInput
+          method = {method}
+          changeMethod = {changeMethod}
+        />
         <StrengthInput 
           goldenRatio = {goldenRatio}
           setGoldenRatio = {updateGoldenRatio}
