@@ -2,32 +2,28 @@ import React, { useState, useEffect } from 'react';
 
 import './App.css';
 
-import BrewMethodInput from './components/BrewMethodInput'
 import QuantityInput from './components/QuantityInput';
 import StrengthInput from './components/StrengthInput';
 import Timer from './components/Timer';
 
-const DefaultMethod = "Pour Over"
-const DefaultWater = 558
-const DefaultRatio = 15.5
+const DefaultWater = 558;
+const DefaultRatio = 15.5;
 const DefaultSeconds = 180;
+const DefaultCupSize = 280;
 
 const App = () => {
-  const [method, setMethod] = useState(DefaultMethod);
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
   const [waterGrams, setWaterGrams] = useState(DefaultWater);
   const [seconds, setSeconds] = useState(DefaultSeconds);
   const [timerOn, setTimerOn] = useState(false);
   
   useEffect(() => {
-    const method = localStorage.getItem('method') || DefaultMethod;
     const goldenRatio = parseFloat(localStorage.getItem('goldenRatio')) || DefaultRatio;
     const waterGrams = parseFloat(localStorage.getItem('waterGrams'))
         || DefaultWater;
     const seconds = parseFloat(localStorage.getItem('seconds'))
         || DefaultSeconds;
 
-    setMethod(method);
     setGoldenRatio(goldenRatio);
     setWaterGrams(waterGrams);
     setSeconds(seconds);
@@ -85,11 +81,6 @@ const App = () => {
     setTimerOn(!timerOn);
   };
 
-  const changeMethod = (event) => {
-    let method = event.target.value;
-    setMethod(method);
-  };
-
   const updateGoldenRatio = (event) => {
     let ratio = event.target.value;
     setGoldenRatio(parseFloat(ratio));
@@ -102,12 +93,12 @@ const App = () => {
 
     if (eventInfo[0] === 'cups') {
       if (eventInfo[1] === 'amount') {
-        newWater = value * 279
+        newWater = value * DefaultCupSize;
       } else {
         newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= 69.75
-            ? value - 69.75
-            : value + 69.75
+          eventInfo[1] === 'decrement' && waterGrams >= (DefaultCupSize/4)
+            ? value - (DefaultCupSize/4)
+            : value + (DefaultCupSize/4)
       }
     } else if (eventInfo[0] === 'coffeeGrams') {
       if (eventInfo[1] === 'amount') {
@@ -132,7 +123,6 @@ const App = () => {
   };
 
   const saveSettings = () => {
-    localStorage.setItem('method', method);
     localStorage.setItem('goldenRatio', 
       goldenRatio);
     localStorage.setItem('waterGrams', 
@@ -143,10 +133,6 @@ const App = () => {
   return (
     <div className="App">
       <main>
-        <BrewMethodInput
-          method = {method}
-          changeMethod = {changeMethod}
-        />
         <StrengthInput 
           goldenRatio = {goldenRatio}
           setGoldenRatio = {updateGoldenRatio}
