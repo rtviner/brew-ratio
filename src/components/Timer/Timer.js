@@ -7,7 +7,7 @@ import TimerDisplay from './TimerDisplay';
 import IncrementDecrementButton from '../shared/IncrementDecrementButton';
 
 
-const Timer = ({seconds, stepUpTime, stepDownTime, resetTimer, playPause}) => {  
+const Timer = ({seconds, stepTime, resetTimer, playPause}) => {  
   let twoDigits = time => (time >= 10 ? time : `0${time}`);
 
   const countdownView = (seconds) => {
@@ -22,12 +22,12 @@ const Timer = ({seconds, stepUpTime, stepDownTime, resetTimer, playPause}) => {
       <div className="increment timer">
         <IncrementDecrementButton 
           id="timer"
-          onClick={stepUpTime}
+          onClick={stepTime}
           text="+"
         />
         <IncrementDecrementButton 
           id="timer"
-          onClick={stepDownTime}
+          onClick={stepTime}
           text="-"
         />
       </div>
@@ -42,8 +42,7 @@ const Timer = ({seconds, stepUpTime, stepDownTime, resetTimer, playPause}) => {
 
 Timer.propTypes = {
     seconds: PropTypes.number,
-    stepUpTime: PropTypes.func,
-    stepDownTime: PropTypes.func,
+    stepTime: PropTypes.func,
     countdownView: PropTypes.string,
     playPause: PropTypes.func,
     resetTimer: PropTypes.func
