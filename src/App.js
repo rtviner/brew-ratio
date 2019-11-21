@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import './App.css';
+import {DefaultWater, DefaultRatio, DefaultSeconds, cupSize} from './defaultValues.js'
+import {stepDownValue, stepUpValue} from './stepValue.js'
 
 import QuantityInput from './components/QuantityInput';
 import StrengthInput from './components/StrengthInput';
 import Timer from './components/Timer';
-
-const DefaultWater = 558;
-const DefaultRatio = 15.5;
-const DefaultSeconds = 180;
-const DefaultCupSize = 280;
 
 const App = () => {
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
@@ -54,23 +51,15 @@ const App = () => {
     return () => clearInterval(tick);
   }, [timerOn, seconds]);
 
-  const stepUpTime = () => {
-    const currentSeconds = seconds;
-
-    if (!timerOn && currentSeconds < 420) {
-      let newSeconds = currentSeconds + 1;
+  const stepTime = (event) => {
+    if (!timerOn && seconds < 420) {
+      let newSeconds = 
+        (event.target.innerText === '-') ? 
+        stepDownValue(seconds, 1) :
+        stepUpValue(seconds, 1);
       setSeconds(newSeconds);
-    }
-  };
-
-  const stepDownTime = () => {
-    const currentSeconds = seconds;
-
-    if (!timerOn && seconds > 0) {
-      let newSeconds = currentSeconds - 1;
-      setSeconds(newSeconds);
-    }
-  };
+    }  
+  }
 
   const resetTimer = () => {
     setSeconds(DefaultSeconds);
@@ -86,39 +75,26 @@ const App = () => {
     setGoldenRatio(parseFloat(ratio));
   };
 
-  const updateWater = (event) => {
-    const eventInfo = event.target.id.split('-')
-    let value = event.target.type === 'number' ? event.target.value : waterGrams
-    let newWater
+  const conversionFactors = {
+    cups: cupSize,
+    coffeeGrams: goldenRatio,
+    waterGrams: 1
+  };
 
-    if (eventInfo[0] === 'cups') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value * DefaultCupSize;
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= (DefaultCupSize/4)
-            ? value - (DefaultCupSize/4)
-            : value + (DefaultCupSize/4)
-      }
-    } else if (eventInfo[0] === 'coffeeGrams') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value * goldenRatio
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= goldenRatio
-            ? value - goldenRatio
-            : value + goldenRatio
-      }
-    } else if (eventInfo[0] === 'waterGrams') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= 1
-            ? value - 1
-            : value + 1
-      }
-    }
+  const updateWater = (event) => {
+    const eventInfo = event.target.id.split('-');
+    let conversionFactor = conversionFactors[eventInfo[0]];
+    let incrementFactor = (eventInfo[0] === 'cups') ? conversionFactor/4 : conversionFactor;
+    let value = event.target.type === 'number' ? event.target.value : waterGrams;
+    let newWater;
+
+    if (eventInfo[1] === 'decrement') { 
+      newWater = stepDownValue(value,incrementFactor);
+    } else if (eventInfo[1] === 'increment') {
+      newWater = stepUpValue(value,incrementFactor);
+    } else if (eventInfo[1] === 'amount') {
+      newWater = value * conversionFactor;
+    };
     setWaterGrams(newWater);
   };
 
@@ -144,8 +120,7 @@ const App = () => {
         />
         <Timer 
           seconds = {seconds}
-          stepUpTime = {stepUpTime}
-          stepDownTime = {stepDownTime}
+          stepTime = {stepTime}
           resetTimer = {resetTimer}
           playPause = {playPause}
         />
