@@ -11,6 +11,7 @@ const DefaultMethod = "Pour Over"
 const DefaultWater = 558
 const DefaultRatio = 15.5
 const DefaultSeconds = 180;
+const cupSize = 279;
 
 const App = () => {
   const [method, setMethod] = useState(DefaultMethod);
@@ -70,11 +71,22 @@ const App = () => {
   const stepDownTime = () => {
     const currentSeconds = seconds;
 
-    if (!timerOn && seconds > 0) {
+    if (!timerOn && currentSeconds > 0) {
       let newSeconds = currentSeconds - 1;
       setSeconds(newSeconds);
     }
   };
+
+  const stepDownValue = (value, conversionFactor) => {
+    if (value > conversionFactor) {
+      return value - conversionFactor;
+    } 
+  }
+  
+
+  const stepUpValue = (value, conversionFactor) => {
+    return value + conversionFactor;
+  }
 
   const resetTimer = () => {
     setSeconds(DefaultSeconds);
@@ -96,38 +108,25 @@ const App = () => {
   };
 
   const updateWater = (event) => {
-    const eventInfo = event.target.id.split('-')
-    let value = event.target.type === 'number' ? event.target.value : waterGrams
-    let newWater
+    const conversionFactors = {
+      cups: cupSize,
+      coffeeGrams: goldenRatio,
+      waterGrams: 1
+    };
+    const eventInfo = event.target.id.split('-');
+    let conversionFactor = conversionFactors[eventInfo[0]];
+    let incrementFactor = (eventInfo[0] === 'cups') ? conversionFactor/4 : conversionFactor;
+    let value = event.target.type === 'number' ? event.target.value : waterGrams;
+    let newWater;
 
-    if (eventInfo[0] === 'cups') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value * 279
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= 69.75
-            ? value - 69.75
-            : value + 69.75
-      }
-    } else if (eventInfo[0] === 'coffeeGrams') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value * goldenRatio
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= goldenRatio
-            ? value - goldenRatio
-            : value + goldenRatio
-      }
-    } else if (eventInfo[0] === 'waterGrams') {
-      if (eventInfo[1] === 'amount') {
-        newWater = value
-      } else {
-        newWater =
-          eventInfo[1] === 'decrement' && waterGrams >= 1
-            ? value - 1
-            : value + 1
-      }
-    }
+    if (eventInfo[1] === 'decrement') { 
+      newWater = stepDownValue(value,incrementFactor);
+    } else if (eventInfo[1] === 'increment') {
+      newWater = stepUpValue(value,incrementFactor);
+    } else if (eventInfo[1] === 'amount') {
+      newWater = value * conversionFactor;
+    };
+    
     setWaterGrams(newWater);
   };
 
