@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 
 import BrewMethodInput from './components/BrewMethodInput'
+import Instructions from './components/Instructions'
 import QuantityInput from './components/QuantityInput'
 import StrengthInput from './components/StrengthInput'
 import Timer from './components/Timer'
@@ -15,11 +16,12 @@ import {
   DefaultWater,
 } from './constants'
 import { stepDownValue, stepUpValue } from './utils'
+import instructionsData from "./instructions.json";
 
 const App = () => {
   const [cupSize, setCupSize] = useState(DefaultCupSize);
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
-  // const [instructions, setInstructions] = useState(pourOverInstructions);
+  const [instructions, setInstructions] = useState(instructionsData['Pour Over']);
   const [method, setMethod] = useState(DefaultMethod);
   const [seconds, setSeconds] = useState(DefaultSeconds);
   const [timerOn, setTimerOn] = useState(false);
@@ -113,12 +115,25 @@ const App = () => {
     setWaterGrams(newWater)
   }
 
+  // async fetchData () {
+  //   try {
+  //     const response = await fetch(instructionsUrl);
+  //     const json = await response.json();
+  //     console.log(json);
+  //   } catch (error) {
+  //       this.setError(error: error.message)
+  //   }
+  // }
+
   const changeMethod = event => {
     let method = event.target.value
     let cupSize = (method === 'AeroPress') ? aeroCupSize : DefaultCupSize;
     let ratio = (method === 'AeroPress') ? 13 : DefaultRatio;
     let water = (method === 'AeroPress') ? 220 : DefaultWater;
     let brewTime = (method === 'AeroPress') ? 120 : DefaultSeconds;
+    let instructions = (instructionsData[method]);
+
+    setInstructions(instructions);
     setCupSize(cupSize);
     setGoldenRatio(ratio);
     setMethod(method);
@@ -132,7 +147,8 @@ const App = () => {
     localStorage.setItem('waterGrams', waterGrams)
     localStorage.setItem('seconds', seconds)
   }
-
+  if (!instructions) {return null;}
+  // console.log(instructions.steps);
   return (
     <div className="App">
       <main>
@@ -164,6 +180,12 @@ const App = () => {
         >
           Save Settings
         </button>
+        <Instructions
+          grindSize={instructions["grind-size"]}
+          list={instructions.steps}
+          goldenRatio={goldenRatio}
+          waterGrams={waterGrams}
+        />
       </main>
     </div>
   )
