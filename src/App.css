@@ -234,12 +234,14 @@ button#saveSettings {
 	margin: 0 auto;
 	width: 100%;
   max-width: 18em;
+  /*make max-width 36em for larger screens?*/
   line-height: 150%;
   font-size: 1.2rem;
 }
 
 li {
 	padding: .25em;
+	text-align: left;
 }
 
 @media screen and (min-width: 440px) {
