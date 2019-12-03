@@ -230,6 +230,18 @@ button#saveSettings {
     border-radius: 5px;
 }
 
+.instructions {
+	margin: 0 auto;
+	width: 100%;
+  max-width: 18em;
+  line-height: 150%;
+  font-size: 1.2rem;
+}
+
+li {
+	padding: .25em;
+}
+
 @media screen and (min-width: 440px) {
 	h2.title {
 		min-height: 0;
