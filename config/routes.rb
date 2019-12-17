@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+# path = "" removes "/api" before /instructions bc subdomain is now api
   namespace :api, :path => "", :constraints => {:subdoamin => "api"}, :default => {:format => :json} do
     resources :instructions
   end
