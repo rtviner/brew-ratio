@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Instructions = ({ grindSize, list, waterGrams, goldenRatio }) => {
+  console.log("list", list)
+  console.log(grindSize)
   if (!list) return null;
+
   const listItems = list.map((item, index) => 
     <li key={index}> 
       {item} 

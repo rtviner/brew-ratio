@@ -16,12 +16,13 @@ import {
   DefaultWater,
 } from './constants'
 import { stepDownValue, stepUpValue } from './utils'
-import instructionsData from "./instructions.json";
+// import instructionsData from "./instructions.json";
+const DefaultInstructionsUrl = "/instructions";
 
-const App = () => {
+const App = () => { 
   const [cupSize, setCupSize] = useState(DefaultCupSize);
   const [goldenRatio, setGoldenRatio] = useState(DefaultRatio);
-  const [instructions, setInstructions] = useState(instructionsData['Pour Over']);
+  const [instructions, setInstructions] = useState("");
   const [method, setMethod] = useState(DefaultMethod);
   const [seconds, setSeconds] = useState(DefaultSeconds);
   const [timerOn, setTimerOn] = useState(false);
@@ -41,6 +42,11 @@ const App = () => {
     setWaterGrams(waterGrams)
     setSeconds(seconds)
   }, [])
+
+ 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     var tick = null
@@ -67,6 +73,17 @@ const App = () => {
     return () => clearInterval(tick)
   }, [timerOn, seconds])
 
+  async function fetchData() {
+    try {
+      const response = await fetch((DefaultInstructionsUrl));
+      const json = await response.json();
+      let instructionsData = json;
+      console.log(instructionsData[2]["grindSize"]);
+      setInstructions(instructionsData[2]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const stepTime = event => {
     if (!timerOn && seconds < 420) {
       let newSeconds =
@@ -115,25 +132,18 @@ const App = () => {
     setWaterGrams(newWater)
   }
 
-  // async fetchData () {
-  //   try {
-  //     const response = await fetch(instructionsUrl);
-  //     const json = await response.json();
-  //     console.log(json);
-  //   } catch (error) {
-  //       this.setError(error: error.message)
-  //   }
-  // }
-
   const changeMethod = event => {
     let method = event.target.value
     let cupSize = (method === 'AeroPress') ? aeroCupSize : DefaultCupSize;
     let ratio = (method === 'AeroPress') ? 13 : DefaultRatio;
     let water = (method === 'AeroPress') ? 220 : DefaultWater;
     let brewTime = (method === 'AeroPress') ? 120 : DefaultSeconds;
-    let instructions = (instructionsData[method]);
+    // let instructions = (instructionsData[method]);
 
-    setInstructions(instructions);
+    // Client.search(method, instructions => {
+    //   setInstructions(instructions)
+    // })
+
     setCupSize(cupSize);
     setGoldenRatio(ratio);
     setMethod(method);
@@ -181,8 +191,8 @@ const App = () => {
           Save Settings
         </button>
         <Instructions
-          grindSize={instructions["grind-size"]}
-          list={instructions.steps}
+          grindSize={instructions['grindSize']}
+          list={instructions['steps'].split(".,")}
           goldenRatio={goldenRatio}
           waterGrams={waterGrams}
         />
