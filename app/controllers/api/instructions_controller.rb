@@ -2,8 +2,8 @@ class Api::InstructionsController < ApplicationController
   # all instructions
   def index
     # render :json => Instruction.all
-    @instruction = Instruction.by_brewMethod(params[:brewMethod])
-    render :json => @instruction
+    @instructions = Instruction.by_brewMethod(params[:brewMethod])
+    render :json => @instructions
   end
   # instructions by id
   def show
