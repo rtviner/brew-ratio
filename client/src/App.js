@@ -75,11 +75,10 @@ const App = () => {
 
   async function fetchData() {
     try {
-      const response = await fetch((DefaultInstructionsUrl));
+      const response = await fetch(`${DefaultInstructionsUrl}?brewMethod=${method}`);
       const json = await response.json();
       let instructionsData = json;
-      console.log(instructionsData[2]["grindSize"]);
-      setInstructions(instructionsData[2]);
+      setInstructions(instructionsData[0]);
     } catch (error) {
       console.log(error);
     }
@@ -138,12 +137,7 @@ const App = () => {
     let ratio = (method === 'AeroPress') ? 13 : DefaultRatio;
     let water = (method === 'AeroPress') ? 220 : DefaultWater;
     let brewTime = (method === 'AeroPress') ? 120 : DefaultSeconds;
-    // let instructions = (instructionsData[method]);
-
-    // Client.search(method, instructions => {
-    //   setInstructions(instructions)
-    // })
-
+    //change instructions in here too...
     setCupSize(cupSize);
     setGoldenRatio(ratio);
     setMethod(method);
