@@ -1,0 +1,17 @@
+[
+	{
+		"brewMethod": "AeroPress",
+		"grindSize": "medium-fine",
+		"steps": "Place the AeroPress filter into the basket and rinse the filter and brew chamber with hot water to warm everything up and rinse the paper taste from the filter, Affix the basket to the bottom of the brew chamber and place it on top of a mug, Set on the scale and press 'tare'., Add the appropriate amount of ground coffee to the brew chamber, tare the scale again, Start your timer, pour hot water (195°-205°F) into the brew chamber, saturating the grounds within 10 seconds.  Pour until the total weight of water is reached or until the No. 4 on the chamber., Stir the slurry. Place the plunger on the brew chamber and pull up slightly to create a pressure seal., At 1:15, remove the pressure seal and stir the slurry. Put the plunger back on and gently press down with steady pressure, stop as soon as you hear a hissing sound."
+	},
+	{
+		"brewMethod": "French Press",
+		"grindSize": "coarse",
+		"steps": "Fill empty french press with hot water so that it pre-heats while you prepare ground coffee., Empty out the water and add appropriate amount of ground coffee., Set on the scale and press ‘tare’., Pour a small amount of hot water (195°-205°F) into the french press to dampen the bed of grounds., Start your timer and wait 30 seconds, allowing coffee to bloom., Continue pouring water over the grounds until the total weight of water is reached., Gently stir the slurry, then place filter and plunger onto the french press to hold in heat., At 4 min, remove lid and stir the slurry a few times. Replace lid. Push plunger down slowly."
+	},
+	{
+		"brewMethod": "Pour Over",
+		"grindSize": "medium-fine",
+		"steps": "Set the Pour Over Cone onto a cup, place the paper filter inside the cone., Pour a small amount of hot water through the empty filter to rinse paper taste from the filter., Prepare ground coffee., Empty any water from the cup and place cup with cone onto scale. Add coffee grounds., Press ‘tare’ on the scale., Pour a small amount of hot water (195°-205°F) to dampen the bed of grounds. Start your timer and wait 30 seconds, allowing coffee to bloom., Continue pouring water in several short, circular pours, keeping the height of slurry consistent as it drains through. Stop when you reach the total weight of water (3-5 min), Wait for coffee to drain and discard the filter and grounds."
+	}
+]
