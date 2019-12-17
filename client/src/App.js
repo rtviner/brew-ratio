@@ -77,8 +77,7 @@ const App = () => {
     try {
       const response = await fetch(`${DefaultInstructionsUrl}?brewMethod=${method}`);
       const json = await response.json();
-      let instructionsData = json;
-      setInstructions(instructionsData[0]);
+      setInstructions(json[0]);
     } catch (error) {
       console.log(error);
     }
