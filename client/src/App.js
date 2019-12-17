@@ -46,7 +46,7 @@ const App = () => {
  
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [method]);
 
   useEffect(() => {
     var tick = null
@@ -152,7 +152,7 @@ const App = () => {
     localStorage.setItem('seconds', seconds)
   }
   if (!instructions) {return null;}
-  // console.log(instructions.steps);
+  
   return (
     <div className="App">
       <main>
