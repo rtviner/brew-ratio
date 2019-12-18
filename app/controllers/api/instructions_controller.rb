@@ -1,7 +1,7 @@
 class Api::InstructionsController < ApplicationController
   # all instructions
   def index
-    # render :json => Instruction.all
+    # select instructions that match method query
     @instructions = Instruction.by_brewMethod(params[:brewMethod])
     render :json => @instructions
   end
@@ -12,13 +12,12 @@ class Api::InstructionsController < ApplicationController
   end
 
   def create
-    instruction = Instruction.new(instruction_params)
+    @instruction = Instruction.new(instruction_params)
 
-    if instruction.save
-      render json: instruction, status: :created
+    if @instruction.save
+      render json: @instruction, status: :created
     else
-      # render json: instruction.errors, status: :unprocessable_entity
-      render 'new'
+      render json: @instruction.errors, status: :unprocessable_entity
     end
   end
 
