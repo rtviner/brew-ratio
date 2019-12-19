@@ -3,7 +3,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "10.15.3"
+    "node": "11.3.0"
   },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
