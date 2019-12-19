@@ -12,6 +12,7 @@
     "heroku-postbuild": "yarn build && yarn deploy"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.12.0"
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8"
   }
 }
