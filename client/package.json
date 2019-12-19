@@ -30,7 +30,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.12.0"
   }
 }
