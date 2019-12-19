@@ -1,4 +1,4 @@
-import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
