@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   namespace :api, :path => "", :constraints => {:subdoamin => "api"}, :default => {:format => :json} do
     resources :instructions
   end
+  # get "/*path", to: "react#index"
 end

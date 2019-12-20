@@ -23,3 +23,6 @@
 
 .byebug_history
 node_modules
+
+# Production
+/public
