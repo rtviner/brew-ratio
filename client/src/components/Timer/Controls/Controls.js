@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { faPlay, faPause, faRefresh } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faSync } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Controls = ({ playPauseClick, resetClick }) => (
@@ -17,7 +17,7 @@ const Controls = ({ playPauseClick, resetClick }) => (
             id="reset"
             onClick={resetClick}
         >
-            <FontAwesomeIcon icon={faRefresh} />
+            <FontAwesomeIcon icon={faSync} />
         </button>
     </div>
 );
