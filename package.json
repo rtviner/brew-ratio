@@ -14,7 +14,7 @@
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   },
   "eslintConfig": {
     "extends": "react-app"
