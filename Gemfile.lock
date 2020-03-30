@@ -87,25 +87,16 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.13.0)
     nio4r (2.5.2)
-<<<<<<< HEAD
-    nokogiri (1.10.7)
-      mini_portile2 (~> 2.4.0)
-    pg (1.1.4)
-    public_suffix (4.0.1)
-    puma (3.12.2)
-    rack (2.0.7)
-    rack-cors (1.1.0)
-      rack (>= 2.0.0)
-<<<<<<< HEAD
-=======
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
-    public_suffix (4.0.1)
+    pg (1.1.4)
+    public_suffix (4.0.3)
     puma (3.12.4)
     rack (2.0.8)
->>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
-=======
->>>>>>> d02df7b8110dc5c7c0723cc01293462bf45ea166
+    rack-cors (1.1.0)
+      rack (>= 2.0.0)
+    rack-proxy (0.6.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.7)
@@ -183,6 +174,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webpacker (4.2.2)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -199,20 +194,9 @@ DEPENDENCIES
   foreman (~> 0.82.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
-<<<<<<< HEAD
-<<<<<<< HEAD
   pg
-  puma (~> 3.7)
-  rack-cors
-=======
   puma (~> 3.12)
-  rack (>= 2.0.8)
->>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
-=======
-  pg
-  puma (~> 3.7)
   rack-cors
->>>>>>> d02df7b8110dc5c7c0723cc01293462bf45ea166
   rails (~> 5.1.7)
   rb-readline
   responders
@@ -226,6 +210,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webpacker (>= 4.0.x)
 
 BUNDLED WITH
    1.16.1
