@@ -87,6 +87,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.13.0)
     nio4r (2.5.2)
+<<<<<<< HEAD
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     pg (1.1.4)
@@ -95,6 +96,13 @@ GEM
     rack (2.0.7)
     rack-cors (1.1.0)
       rack (>= 2.0.0)
+=======
+    nokogiri (1.10.8)
+      mini_portile2 (~> 2.4.0)
+    public_suffix (4.0.1)
+    puma (3.12.4)
+    rack (2.0.8)
+>>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.7)
@@ -188,9 +196,14 @@ DEPENDENCIES
   foreman (~> 0.82.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+<<<<<<< HEAD
   pg
   puma (~> 3.7)
   rack-cors
+=======
+  puma (~> 3.12)
+  rack (>= 2.0.8)
+>>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
   rails (~> 5.1.7)
   rb-readline
   responders
