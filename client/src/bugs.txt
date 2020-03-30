@@ -40,3 +40,11 @@ Personal goals
 - learn more about progressive web apps/service workers/offline capability
 - have a better git workflow, what should commit messages look like, when should I commit? when should I push?
 - learn more about testing
+
+dev procfile
+web: cd client && npm start
+api: bundle exec rails s -p 3001
+
+production procfile
+web: bundle exec rails s
+release: bin/rake db:migrate

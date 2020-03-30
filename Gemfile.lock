@@ -96,6 +96,7 @@ GEM
     rack (2.0.7)
     rack-cors (1.1.0)
       rack (>= 2.0.0)
+<<<<<<< HEAD
 =======
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
@@ -103,6 +104,8 @@ GEM
     puma (3.12.4)
     rack (2.0.8)
 >>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
+=======
+>>>>>>> d02df7b8110dc5c7c0723cc01293462bf45ea166
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.7)
@@ -197,6 +200,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
 <<<<<<< HEAD
+<<<<<<< HEAD
   pg
   puma (~> 3.7)
   rack-cors
@@ -204,6 +208,11 @@ DEPENDENCIES
   puma (~> 3.12)
   rack (>= 2.0.8)
 >>>>>>> 4cbd2f39e74e8f02ea96c571a875e647ea877fde
+=======
+  pg
+  puma (~> 3.7)
+  rack-cors
+>>>>>>> d02df7b8110dc5c7c0723cc01293462bf45ea166
   rails (~> 5.1.7)
   rb-readline
   responders
