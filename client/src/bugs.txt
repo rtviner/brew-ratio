@@ -1,0 +1,42 @@
+2 golden ratio buttons are highlighted at a time X
+	- original active button remains active when another button is clicked X
+
+Every amount should update when one amount is updated X
+	
+Calculations need to be updated to reflect change from amount of servings to servings desired in oz converted to mL X
+
+add timer - adjustable between 2 - 5 min X
+
+add ability to save settings X
+
+small screen sizes (<= 617px), make all the amount input buttons fit on the screen X
+
+upgrade styles in general X
+
+update settings so double tap button does not enlarge screen X
+
+move all default variables to a separate file? X
+Can methods for updating water and strength be moved to their components?
+	Can water and goldenratio states be moved to components?
+
+eventually...
+
+add options to select aeropress, frenchpress, or pourover X
+	aeropress = change the cupSize from 279 to 220 or 209?? X
+
+	include directions for each method 8-10 steps X
+	
+	change default time depending on method X
+		2min as default for aeropress
+		3.5 min default for pourover
+		4 min default for frenchpress
+
+Do cupSize and instructions need to be a state?	
+
+Personal goals 
+- do better with abstraction, encapsulation, reusability, Object oriented principles
+- learn to use chrome dev tools more effectively
+- learn to use the command line more effectively
+- learn more about progressive web apps/service workers/offline capability
+- have a better git workflow, what should commit messages look like, when should I commit? when should I push?
+- learn more about testing
