@@ -2,21 +2,8 @@
 
 ## Description
 
-Brew Ratio is a coffee recipe calculator that can be used to determine the appropriate amount of ground coffee and hot water (in grams) necessary to make the desired strength and number of servings of brewed coffee.  Alternatively, Brew Ratio can be used to determine the amount of hot water needed to brew the random amount of coffee beans left at the end of the bag.  Currently the app is designed for the pour over brew method specifically.
+This is a Rails API for https://github.com/rtviner/brew-ratio-client.  
 
-Calculate the ingredients needed for the servings of brewed coffee desired:
-![image](https://user-images.githubusercontent.com/34410968/54787260-cf14ec80-4bf0-11e9-9285-17c6fb1e741d.png "Calculating ingredients needed for desired servings")
-
-Calculate the water needed and servings possible with random amount of coffee that is leftover:
-![image](https://user-images.githubusercontent.com/34410968/54787191-9412b900-4bf0-11e9-97bf-f3dfd03db90e.png "Calculating water needed and serving possible with coffee amount left")
-
-### Why?  
-Sometimes math is hard, especially if no coffee has been consumed yet.  Also, I have been learning the JavaScript library, React, and wanted to create something to help solidify what I have learned.
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Demo
-
-The app can be viewed live here: https://rtviner.github.io/brew-ratio/
 
 ## Getting Started
 
@@ -31,92 +18,41 @@ You should see a copy of the repository in your own GitHub account with "forked"
 
     ```$ cd brew-ratio```
 
-4. Install all the dependencies in package.json (checkout https://github.com/facebook/create-react-app "What's Included?" to see what is included with Create React App):
+4. In the project directory, you can run:
+    
+    ```$ bundle install```
+    ```$ rake db:create```
+    ```$ rake db:migrate```
+    ```$ rake db:seed```
 
-    ```$ npm install```
+5.  Start the server:
 
-5. Finally run the following command to open the app in your browser at http://localhost:3000.
+    ```$ bin/rails server```
+  You should see the Rails "Welcome Aboard" message.
 
-    ```$ npm start```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Folder Structure
 
 ```
 brew-ratio/
-  README.md
-  node_modules/
-  package.json
+  app/
+  bin/
+  client/
+  config/
+  db/
+  lib/
+  log/
   public/
-    index.html
-    manifest.json
-  src/
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
- 	serviceWorker.js
+  test/
+  tmp/
+  vendor/
  ```
-+ *index.html*: Contains div#root, the div which all the app components are loaded into.
-+ *manifest.json*: Default Create React App Web App Manifest that can be customized to generate a Progressive Web App.
++ *app*: Models, Controllers, Views, Helpers
++ *bin*: App executables. bundle, rails, rake, spring.
++ *db*: Migrations
 
-+ *App.css*: CSS styles for the App component.
-+ *App.js*: File containing the App component, which contains all other components.  The JSX code for the app.
-+ *App.test.js*: Tests for JSX code.
-+ *index.css*: The CSS file corresponding to index.js
-+ *index.js*: The JavaScript file corresponding to index.html which contains the command to render the App component in the root div.
-+ *serviceWorker.js*: Default Create React App Service Worker that can be customized to generate a Progressive Web App.
 
-## To Do
 
-This app is still a work in progress... the following are some ideas for future renditions of Brew Ratio.
-- Add a timer and brewing instructions.
-- Add an iced coffee option.
-- Add different brew methods, AeroPress, French Press, and stovetop espresso makers.
-- Allow users to input their own preferred golden ratios for different strengths and save...
 
 
 
