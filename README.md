@@ -21,16 +21,21 @@ You should see a copy of the repository in your own GitHub account with "forked"
 4. In the project directory, you can run:
     
     ```$ bundle install```
+
     To install the dependencies.
 
     ```$ rake db:create```
+
     ```$ rake db:migrate```
+
     ```$ rake db:seed```
+
     To create and seed the database.
 
 5.  Start the server:
 
     ```$ bin/rails server```
+    
   You should see the Rails "Welcome Aboard" message.
 
 
